@@ -13,14 +13,15 @@ namespace EntityFramework_CodeFirst.MODEL
     {
         [Key]
         public int OrderNumber { get; set; }
+
         public DateTime OrderDate { get; set; }
         public DateTime RequiredDate { get; set; }
         public DateTime ShippedDate { get; set; }
         public string Status { get; set; }
         public string Comments { get; set; }
-        [ForeignKey("Customer")]
+        [ForeignKey("Customers")]
         public int CustomerNumber { get; set; }
 
-        public Customer Customer { get; set; }
+        public Customers Customers { get; set; }
     }
 }
