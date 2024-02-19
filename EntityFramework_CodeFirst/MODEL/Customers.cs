@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EntityFramework_CodeFirst.MODEL
 {
-    class Customer
+    class Customers
     {
         public int CustomerNumber { get; set; }
         public string CustomerName { get; set; }
