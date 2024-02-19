@@ -8,5 +8,9 @@ namespace EntityFramework_CodeFirst.MODEL
 {
     class ProductLines
     {
+        public string ProductLine { get; set; }
+        public string TextDescription { get; set; }
+        public string HtmlDescription { get; set; }
+        public string Image { get; set; }
     }
 }
