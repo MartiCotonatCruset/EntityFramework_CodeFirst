@@ -22,6 +22,14 @@ namespace EntityFramework_CodeFirst.MODEL
             }
 
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<OrderDetails>()
+                .HasKey(o => new { o.OrderNumber, o.ProductCode });
+            modelBuilder.Entity<Payments>()
+                .HasKey(o => new { o.CustomerNumber, o.CheckNumber });
+        }
+
 
         public DbSet<Customers> Customers { get; set; }
         public DbSet<Employees> Employees { get; set; }

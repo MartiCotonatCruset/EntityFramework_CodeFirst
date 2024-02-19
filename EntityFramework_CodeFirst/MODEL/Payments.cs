@@ -11,10 +11,8 @@ namespace EntityFramework_CodeFirst.MODEL
     [Table("PAYMENTS")]
     class Payments
     {
-        [Key]
         [ForeignKey("Customers")]
         public int CustomerNumber { get; set; }
-        [Key]
         public string CheckNumber { get; set; }
         [Required]
         public DateTime PaymentDate { get; set; }

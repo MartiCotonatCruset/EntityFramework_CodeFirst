@@ -12,10 +12,8 @@ namespace EntityFramework_CodeFirst.MODEL
     class OrderDetails
     {
         [ForeignKey("Orders")]
-        [Key]
         public int OrderNumber { get; set; }
         [ForeignKey("Products")]
-        [Key]
         public string ProductCode { get; set; }
         public int QuantityOrdered { get; set; }
         public double PriceEach { get; set; }
