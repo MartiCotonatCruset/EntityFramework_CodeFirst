@@ -16,7 +16,9 @@ namespace EntityFramework_CodeFirst.MODEL
         public int CustomerNumber { get; set; }
         [Key]
         public string CheckNumber { get; set; }
+        [Required]
         public DateTime PaymentDate { get; set; }
+        [Required]
         public double Amount { get; set; }
 
         public Customers Customers { get; set; }
