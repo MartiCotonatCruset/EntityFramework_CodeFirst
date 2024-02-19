@@ -8,5 +8,8 @@ namespace EntityFramework_CodeFirst.MODEL
 {
     class Payments
     {
+        public int CustomerNumber { get; set; }
+        public string CheckNumber { get; set; }
+        public DateTime PaymentDate { get; set; }
     }
 }
