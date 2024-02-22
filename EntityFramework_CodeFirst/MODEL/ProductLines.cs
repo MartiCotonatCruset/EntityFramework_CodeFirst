@@ -12,9 +12,13 @@ namespace EntityFramework_CodeFirst.MODEL
     class ProductLines
     {
         [Key]
+        [Column(TypeName = "varchar(50)")]
         public string ProductLine { get; set; }
-        public string TextDescription { get; set; }
-        public string HtmlDescription { get; set; }
-        public string Image { get; set; }
+        [Column(TypeName = "varchar(4000)")]
+        public string? TextDescription { get; set; }
+        [Column(TypeName = "mediumtext")]
+        public string? HtmlDescription { get; set; }
+        [Column(TypeName = "mediumblob")]
+        public string? Image { get; set; }
     }
 }

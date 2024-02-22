@@ -12,24 +12,23 @@ namespace EntityFramework_CodeFirst.MODEL
     class Products
     {
         [Key]
+        [Column(TypeName = "varchar(15)")]
         public string ProductCode { get; set; }
-        [Required]
+        [Column(TypeName = "varchar(70)")]
         public string ProductName { get; set; }
-
-        [Required]
         [ForeignKey("ProductLines")]
+        [Column(TypeName = "varchar(50)")]
         public string ProductLine { get; set; }
-        [Required]
+        [Column(TypeName = "varchar(10)")]
         public string ProductScale { get; set; }
-        [Required]
+        [Column(TypeName = "varchar(50)")]
         public string ProductVendor { get; set; }
-        [Required]
+        [Column(TypeName = "text")]
         public string ProductDescription { get; set; }
-        [Required]
         public short QuantityInStock { get; set; }
-        [Required]
+        [Column(TypeName = "decimal(10,2)")]
         public double BuyPrice { get; set; }
-        [Required]
+        [Column(TypeName = "decimal(10,2)")]
         public double MSRP { get; set; }
 
         public ProductLines ProductLines { get; set; }

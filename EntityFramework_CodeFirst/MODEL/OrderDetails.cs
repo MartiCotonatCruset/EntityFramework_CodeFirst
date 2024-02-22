@@ -14,8 +14,10 @@ namespace EntityFramework_CodeFirst.MODEL
         [ForeignKey("Orders")]
         public int OrderNumber { get; set; }
         [ForeignKey("Products")]
+        [Column(TypeName = "varchar(15)")]
         public string ProductCode { get; set; }
         public int QuantityOrdered { get; set; }
+        [Column(TypeName = "decimal(10,2)")]
         public double PriceEach { get; set; }
         public short OrderLineNumber { get; set; }
 
