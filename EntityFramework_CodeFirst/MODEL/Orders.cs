@@ -14,15 +14,16 @@ namespace EntityFramework_CodeFirst.MODEL
     {
         [Key]
         public int OrderNumber { get; set; }
-        [Required]
-        public Date OrderDate { get; set; }
-        [Required]
-        public Date RequiredDate { get; set; }
-        public Date ShippedDate { get; set; }
-        [Required]
+        [Column(TypeName = "date")]
+        public DateTime OrderDate { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime RequiredDate { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime? ShippedDate { get; set; }
+        [Column(TypeName = "varchar(15)")]
         public string Status { get; set; }
-        public string Comments { get; set; }
-        [Required]
+        [Column(TypeName = "text")]
+        public string? Comments { get; set; }
         [ForeignKey("Customers")]
         public int CustomerNumber { get; set; }
 

@@ -12,14 +12,15 @@ namespace EntityFramework_CodeFirst.Migrations
                 name: "OFFICES",
                 columns: table => new
                 {
-                    OfficeCode = table.Column<string>(nullable: false),
-                    City = table.Column<string>(nullable: false),
-                    Phone = table.Column<string>(nullable: false),
-                    AddressLine1 = table.Column<string>(nullable: false),
-                    AddressLine2 = table.Column<string>(nullable: false),
-                    Country = table.Column<string>(nullable: false),
-                    PostalCode = table.Column<string>(nullable: false),
-                    Territory = table.Column<string>(nullable: false)
+                    OfficeCode = table.Column<string>(type: "varchar(10)", nullable: false),
+                    City = table.Column<string>(type: "varchar(50)", nullable: false),
+                    Phone = table.Column<string>(type: "varchar(50)", nullable: false),
+                    AddressLine1 = table.Column<string>(type: "varchar(50)", nullable: false),
+                    AddressLine2 = table.Column<string>(type: "varchar(50)", nullable: true),
+                    State = table.Column<string>(type: "varchar(50)", nullable: true),
+                    Country = table.Column<string>(type: "varchar(50)", nullable: false),
+                    PostalCode = table.Column<string>(type: "varchar(15)", nullable: false),
+                    Territory = table.Column<string>(type: "varchar(10)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -30,10 +31,10 @@ namespace EntityFramework_CodeFirst.Migrations
                 name: "PRODUCTLINES",
                 columns: table => new
                 {
-                    ProductLine = table.Column<string>(nullable: false),
-                    TextDescription = table.Column<string>(nullable: false),
-                    HtmlDescription = table.Column<string>(nullable: false),
-                    Image = table.Column<string>(nullable: false)
+                    ProductLine = table.Column<string>(type: "varchar(50)", nullable: false),
+                    TextDescription = table.Column<string>(type: "varchar(4000)", nullable: true),
+                    HtmlDescription = table.Column<string>(type: "mediumtext", nullable: true),
+                    Image = table.Column<byte[]>(type: "mediumblob", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -46,13 +47,13 @@ namespace EntityFramework_CodeFirst.Migrations
                 {
                     EmployeeNumber = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    LastName = table.Column<string>(nullable: false),
-                    FirstName = table.Column<string>(nullable: false),
-                    Extension = table.Column<string>(nullable: false),
-                    Email = table.Column<string>(nullable: false),
-                    OfficeCode = table.Column<string>(nullable: false),
-                    ReportsTo = table.Column<int>(nullable: false),
-                    JobTitle = table.Column<string>(nullable: false)
+                    LastName = table.Column<string>(type: "varchar(50)", nullable: false),
+                    FirstName = table.Column<string>(type: "varchar(50)", nullable: false),
+                    Extension = table.Column<string>(type: "varchar(10)", nullable: false),
+                    Email = table.Column<string>(type: "varchar(100)", nullable: false),
+                    OfficeCode = table.Column<string>(type: "varchar(10)", nullable: false),
+                    ReportsTo = table.Column<int>(nullable: true),
+                    JobTitle = table.Column<string>(type: "varchar(50)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -68,22 +69,22 @@ namespace EntityFramework_CodeFirst.Migrations
                         column: x => x.ReportsTo,
                         principalTable: "EMPLOYEES",
                         principalColumn: "EmployeeNumber",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "PRODUCTS",
                 columns: table => new
                 {
-                    ProductCode = table.Column<string>(nullable: false),
-                    ProductName = table.Column<string>(nullable: false),
-                    ProductLine = table.Column<string>(nullable: false),
-                    ProductScale = table.Column<string>(nullable: false),
-                    ProductVendor = table.Column<string>(nullable: false),
-                    ProductDescription = table.Column<string>(nullable: false),
+                    ProductCode = table.Column<string>(type: "varchar(15)", nullable: false),
+                    ProductName = table.Column<string>(type: "varchar(70)", nullable: false),
+                    ProductLine = table.Column<string>(type: "varchar(50)", nullable: false),
+                    ProductScale = table.Column<string>(type: "varchar(10)", nullable: false),
+                    ProductVendor = table.Column<string>(type: "varchar(50)", nullable: false),
+                    ProductDescription = table.Column<string>(type: "text", nullable: false),
                     QuantityInStock = table.Column<short>(nullable: false),
-                    BuyPrice = table.Column<double>(nullable: false),
-                    MSRP = table.Column<double>(nullable: false)
+                    BuyPrice = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
+                    MSRP = table.Column<decimal>(type: "decimal(10,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -102,18 +103,18 @@ namespace EntityFramework_CodeFirst.Migrations
                 {
                     CustomerNumber = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    CustomerName = table.Column<string>(nullable: false),
-                    ContactLastName = table.Column<string>(nullable: false),
-                    ContactFirstName = table.Column<string>(nullable: false),
-                    Phone = table.Column<string>(nullable: false),
-                    AddressLine1 = table.Column<string>(nullable: false),
-                    AddressLine2 = table.Column<string>(nullable: false),
-                    City = table.Column<string>(nullable: false),
-                    State = table.Column<string>(nullable: false),
-                    PostalCode = table.Column<string>(nullable: false),
-                    Country = table.Column<string>(nullable: false),
-                    SalesRepEmployeeNumber = table.Column<int>(nullable: false),
-                    CreditLimit = table.Column<double>(nullable: false)
+                    CustomerName = table.Column<string>(type: "varchar(50)", nullable: false),
+                    ContactLastName = table.Column<string>(type: "varchar(50)", nullable: false),
+                    ContactFirstName = table.Column<string>(type: "varchar(50)", nullable: false),
+                    Phone = table.Column<string>(type: "varchar(50)", nullable: false),
+                    AddressLine1 = table.Column<string>(type: "varchar(50)", nullable: false),
+                    AddressLine2 = table.Column<string>(type: "varchar(50)", nullable: true),
+                    City = table.Column<string>(type: "varchar(50)", nullable: false),
+                    State = table.Column<string>(type: "varchar(50)", nullable: true),
+                    PostalCode = table.Column<string>(type: "varchar(15)", nullable: true),
+                    Country = table.Column<string>(type: "varchar(50)", nullable: false),
+                    SalesRepEmployeeNumber = table.Column<int>(nullable: true),
+                    CreditLimit = table.Column<decimal>(type: "decimal(10,2)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -123,7 +124,7 @@ namespace EntityFramework_CodeFirst.Migrations
                         column: x => x.SalesRepEmployeeNumber,
                         principalTable: "EMPLOYEES",
                         principalColumn: "EmployeeNumber",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -132,11 +133,11 @@ namespace EntityFramework_CodeFirst.Migrations
                 {
                     OrderNumber = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    OrderDate = table.Column<DateTime>(nullable: false),
-                    RequiredDate = table.Column<DateTime>(nullable: false),
-                    ShippedDate = table.Column<DateTime>(nullable: false),
-                    Status = table.Column<string>(nullable: false),
-                    Comments = table.Column<string>(nullable: false),
+                    OrderDate = table.Column<DateTime>(type: "date", nullable: false),
+                    RequiredDate = table.Column<DateTime>(type: "date", nullable: false),
+                    ShippedDate = table.Column<DateTime>(type: "date", nullable: true),
+                    Status = table.Column<string>(type: "varchar(15)", nullable: false),
+                    Comments = table.Column<string>(type: "text", nullable: true),
                     CustomerNumber = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -155,9 +156,9 @@ namespace EntityFramework_CodeFirst.Migrations
                 columns: table => new
                 {
                     CustomerNumber = table.Column<int>(nullable: false),
-                    CheckNumber = table.Column<string>(nullable: false),
-                    PaymentDate = table.Column<DateTime>(nullable: false),
-                    Amount = table.Column<double>(nullable: false)
+                    CheckNumber = table.Column<string>(type: "varchar(50)", nullable: false),
+                    PaymentDate = table.Column<DateTime>(type: "date", nullable: false),
+                    Amount = table.Column<decimal>(type: "decimal(10,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -175,9 +176,9 @@ namespace EntityFramework_CodeFirst.Migrations
                 columns: table => new
                 {
                     OrderNumber = table.Column<int>(nullable: false),
-                    ProductCode = table.Column<string>(nullable: false),
+                    ProductCode = table.Column<string>(type: "varchar(15)", nullable: false),
                     QuantityOrdered = table.Column<int>(nullable: false),
-                    PriceEach = table.Column<double>(nullable: false),
+                    PriceEach = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
                     OrderLineNumber = table.Column<short>(nullable: false)
                 },
                 constraints: table =>

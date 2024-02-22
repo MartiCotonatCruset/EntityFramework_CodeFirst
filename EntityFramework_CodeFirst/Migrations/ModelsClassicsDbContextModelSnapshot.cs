@@ -25,49 +25,46 @@ namespace EntityFramework_CodeFirst.Migrations
 
                     b.Property<string>("AddressLine1")
                         .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("AddressLine2")
-                        .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("City")
                         .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("ContactFirstName")
                         .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("ContactLastName")
                         .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("Country")
                         .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(50)");
 
-                    b.Property<double>("CreditLimit")
-                        .HasColumnType("double");
+                    b.Property<decimal?>("CreditLimit")
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<string>("CustomerName")
                         .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("PostalCode")
-                        .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(15)");
 
-                    b.Property<int>("SalesRepEmployeeNumber")
+                    b.Property<int?>("SalesRepEmployeeNumber")
                         .HasColumnType("int");
 
                     b.Property<string>("State")
-                        .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("CustomerNumber");
 
@@ -84,29 +81,29 @@ namespace EntityFramework_CodeFirst.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("Extension")
                         .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(10)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("JobTitle")
                         .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("OfficeCode")
                         .IsRequired()
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(10)");
 
-                    b.Property<int>("ReportsTo")
+                    b.Property<int?>("ReportsTo")
                         .HasColumnType("int");
 
                     b.HasKey("EmployeeNumber");
@@ -121,35 +118,37 @@ namespace EntityFramework_CodeFirst.Migrations
             modelBuilder.Entity("EntityFramework_CodeFirst.MODEL.Offices", b =>
                 {
                     b.Property<string>("OfficeCode")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(10)");
 
                     b.Property<string>("AddressLine1")
                         .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("AddressLine2")
-                        .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("City")
                         .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("Country")
                         .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("PostalCode")
                         .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(15)");
+
+                    b.Property<string>("State")
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("Territory")
                         .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(10)");
 
                     b.HasKey("OfficeCode");
 
@@ -162,13 +161,13 @@ namespace EntityFramework_CodeFirst.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ProductCode")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(15)");
 
                     b.Property<short>("OrderLineNumber")
                         .HasColumnType("smallint");
 
-                    b.Property<double>("PriceEach")
-                        .HasColumnType("double");
+                    b.Property<decimal>("PriceEach")
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<int>("QuantityOrdered")
                         .HasColumnType("int");
@@ -187,24 +186,23 @@ namespace EntityFramework_CodeFirst.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Comments")
-                        .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("text");
 
                     b.Property<int>("CustomerNumber")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("OrderDate")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("date");
 
                     b.Property<DateTime>("RequiredDate")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("date");
 
-                    b.Property<DateTime>("ShippedDate")
-                        .HasColumnType("datetime(6)");
+                    b.Property<DateTime?>("ShippedDate")
+                        .HasColumnType("date");
 
                     b.Property<string>("Status")
                         .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(15)");
 
                     b.HasKey("OrderNumber");
 
@@ -219,13 +217,13 @@ namespace EntityFramework_CodeFirst.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CheckNumber")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(50)");
 
-                    b.Property<double>("Amount")
-                        .HasColumnType("double");
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<DateTime>("PaymentDate")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("date");
 
                     b.HasKey("CustomerNumber", "CheckNumber");
 
@@ -235,19 +233,16 @@ namespace EntityFramework_CodeFirst.Migrations
             modelBuilder.Entity("EntityFramework_CodeFirst.MODEL.ProductLines", b =>
                 {
                     b.Property<string>("ProductLine")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("HtmlDescription")
-                        .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("mediumtext");
 
-                    b.Property<string>("Image")
-                        .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("mediumblob");
 
                     b.Property<string>("TextDescription")
-                        .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(4000)");
 
                     b.HasKey("ProductLine");
 
@@ -257,33 +252,33 @@ namespace EntityFramework_CodeFirst.Migrations
             modelBuilder.Entity("EntityFramework_CodeFirst.MODEL.Products", b =>
                 {
                     b.Property<string>("ProductCode")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(15)");
 
-                    b.Property<double>("BuyPrice")
-                        .HasColumnType("double");
+                    b.Property<decimal>("BuyPrice")
+                        .HasColumnType("decimal(10,2)");
 
-                    b.Property<double>("MSRP")
-                        .HasColumnType("double");
+                    b.Property<decimal>("MSRP")
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<string>("ProductDescription")
                         .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("text");
 
                     b.Property<string>("ProductLine")
                         .IsRequired()
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("ProductName")
                         .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(70)");
 
                     b.Property<string>("ProductScale")
                         .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(10)");
 
                     b.Property<string>("ProductVendor")
                         .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<short>("QuantityInStock")
                         .HasColumnType("smallint");
@@ -299,9 +294,7 @@ namespace EntityFramework_CodeFirst.Migrations
                 {
                     b.HasOne("EntityFramework_CodeFirst.MODEL.Employees", "Employee")
                         .WithMany()
-                        .HasForeignKey("SalesRepEmployeeNumber")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SalesRepEmployeeNumber");
                 });
 
             modelBuilder.Entity("EntityFramework_CodeFirst.MODEL.Employees", b =>
@@ -314,9 +307,7 @@ namespace EntityFramework_CodeFirst.Migrations
 
                     b.HasOne("EntityFramework_CodeFirst.MODEL.Employees", "ReportsToSelfReference")
                         .WithMany()
-                        .HasForeignKey("ReportsTo")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ReportsTo");
                 });
 
             modelBuilder.Entity("EntityFramework_CodeFirst.MODEL.OrderDetails", b =>
