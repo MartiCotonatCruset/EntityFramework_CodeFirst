@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace EntityFramework_CodeFirst.MODEL
 {
@@ -14,10 +15,10 @@ namespace EntityFramework_CodeFirst.MODEL
         [Key]
         public int OrderNumber { get; set; }
         [Required]
-        public DateTime OrderDate { get; set; }
+        public Date OrderDate { get; set; }
         [Required]
-        public DateTime RequiredDate { get; set; }
-        public DateTime ShippedDate { get; set; }
+        public Date RequiredDate { get; set; }
+        public Date ShippedDate { get; set; }
         [Required]
         public string Status { get; set; }
         public string Comments { get; set; }
