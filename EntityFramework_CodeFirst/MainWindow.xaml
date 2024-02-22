@@ -5,8 +5,58 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EntityFramework_CodeFirst"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+        Title="MainWindow" Height="550" Width="950">
+    <DockPanel>
+        <TextBlock DockPanel.Dock="Top" Text="Models Classics" TextAlignment="Center" FontSize="30" FontWeight="Bold" Background="#1CABFF" Foreground="White" Padding="5"/>
+        <TabControl>
+            <TabItem Header="Product Lines">
+                <DockPanel>
+                    <TextBox DockPanel.Dock="Top" x:Name="tbFiltreProductLines" Margin="5"/>
+                    <DataGrid x:Name="dgProdcutLines"/>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Products">
+                <DockPanel>
+                    <TextBox DockPanel.Dock="Top" x:Name="tbFiltreProducts" Margin="5"/>
+                    <DataGrid x:Name="dgProdcuts"/>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Offices">
+                <DockPanel>
+                    <TextBox DockPanel.Dock="Top" x:Name="tbFiltreOffices" Margin="5"/>
+                    <DataGrid x:Name="dgOffices"/>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Employees">
+                <DockPanel>
+                    <TextBox DockPanel.Dock="Top" x:Name="tbFiltreEmployees" Margin="5"/>
+                    <DataGrid x:Name="dgEmployees"/>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Customers">
+                <DockPanel>
+                    <TextBox DockPanel.Dock="Top" x:Name="tbFiltreCustomer" Margin="5"/>
+                    <DataGrid x:Name="dgCustomer"/>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Payments">
+                <DockPanel>
+                    <TextBox DockPanel.Dock="Top" x:Name="tbFiltrePayments" Margin="5"/>
+                    <DataGrid x:Name="dgPayments"/>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Orders">
+                <DockPanel>
+                    <TextBox DockPanel.Dock="Top" x:Name="tbFiltreOrders" Margin="5"/>
+                    <DataGrid x:Name="dgOrders"/>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Order Details">
+                <DockPanel>
+                    <TextBox DockPanel.Dock="Top" x:Name="tbFiltreOrderDetails" Margin="5"/>
+                    <DataGrid x:Name="dgOrderDetails"/>
+                </DockPanel>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
 </Window>
