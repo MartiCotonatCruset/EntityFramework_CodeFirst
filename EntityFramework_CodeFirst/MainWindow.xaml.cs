@@ -39,7 +39,7 @@ namespace EntityFramework_CodeFirst
 
         public void ImportTables(IDAOManager dao)
         {
-            dao.ImportPayments();
+            dao.ImportProductLines();
         }
     }
 }
