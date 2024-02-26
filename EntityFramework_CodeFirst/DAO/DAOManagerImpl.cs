@@ -1,6 +1,7 @@
 ﻿using EntityFramework_CodeFirst.MODEL;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,11 @@ namespace EntityFramework_CodeFirst.DAO
 {
     public class DAOManagerImpl : IDAOManager
     {
+        private ModelsClassicsDbContext context;
+        public DAOManagerImpl() 
+        { 
+            this.context = new ModelsClassicsDbContext();
+        }
         public bool AddCustomers(Customers oneCustomers)
         {
             throw new NotImplementedException();
