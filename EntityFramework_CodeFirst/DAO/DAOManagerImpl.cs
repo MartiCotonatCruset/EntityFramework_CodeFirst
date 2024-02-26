@@ -10,11 +10,6 @@ namespace EntityFramework_CodeFirst.DAO
 {
     public class DAOManagerImpl : IDAOManager
     {
-        private ModelsClassicsDbContext context;
-        public DAOManagerImpl() 
-        { 
-            this.context = new ModelsClassicsDbContext();
-        }
         public bool AddCustomers(Customers oneCustomers)
         {
             throw new NotImplementedException();
@@ -57,7 +52,14 @@ namespace EntityFramework_CodeFirst.DAO
 
         public void ImportAll()
         {
-            throw new NotImplementedException();
+            ImportProductLines();
+            ImportProducts();
+            ImportOffices();
+            ImportEmployees();
+            ImportCustomers();
+            ImportPayments();
+            ImportOrders();
+            ImportOrderDetails();
         }
 
         public int ImportCustomers()
