@@ -1,4 +1,4 @@
-﻿using EntityFramework_CodeFirst.MODEL;
+using EntityFramework_CodeFirst.MODEL;
 using System;
 using System.Collections.Generic;
 using System.IO;
