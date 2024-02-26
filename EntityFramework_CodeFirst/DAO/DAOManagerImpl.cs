@@ -1,6 +1,7 @@
 using CsvHelper;
 using CsvHelper.Configuration;
 using EntityFramework_CodeFirst.MODEL;
+using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
 using Microsoft.Xaml.Behaviors.Media;
 using System;
 using System.Collections.Generic;
@@ -221,7 +222,25 @@ namespace EntityFramework_CodeFirst.DAO
 
         public int ImportCustomers()
         {
-            throw new NotImplementedException();
+            int sum = 0;
+            try
+            {
+                using (StreamReader sr = new StreamReader(CUSTOMERS_FILE))
+                using (CsvReader cr = new CsvReader(sr, CultureInfo.InvariantCulture))
+                {
+                    var customers = cr.GetRecords<Customers>();
+
+                    foreach (Customers c in customers)
+                    {
+                        if (AddCustomers(c)) sum++;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Source);
+            }
+            return sum;
         }
 
         public int ImportEmployees()
@@ -230,29 +249,13 @@ namespace EntityFramework_CodeFirst.DAO
             try
             {
                 using (StreamReader sr = new StreamReader(EMPLOYEES_FILE))
+                using (CsvReader cr = new CsvReader(sr, CultureInfo.InvariantCulture))
                 {
-                    sr.ReadLine();
-                    string line = sr.ReadLine();
-                    line = line.Replace("\"", "");
-                    string[] fields;
-                    while (line != null)
+                    var employees = cr.GetRecords<Employees>();
+
+                    foreach (Employees e in employees)
                     {
-                        fields = line.Split(',');
-                        string reportsTo = fields[6];
-                        if (fields[6] == "NULL") reportsTo = null;
-                        Employees e = new Employees()
-                        {
-                            EmployeeNumber = Convert.ToInt32(fields[0]),
-                            LastName = fields[1],
-                            FirstName = fields[2],
-                            Extension = fields[3],
-                            Email = fields[4],
-                            OfficeCode = fields[5],
-                            ReportsTo = Convert.ToInt32(reportsTo),
-                            JobTitle = fields[7],
-                        };
-                        line = sr.ReadLine();
-                        line = line.Replace("\"", "");
+                        if (AddEmployees(e)) sum++;
                     }
                 }
             }
@@ -269,32 +272,13 @@ namespace EntityFramework_CodeFirst.DAO
             try
             {
                 using (StreamReader sr = new StreamReader(OFFICES_FILE))
+                using (CsvReader cr = new CsvReader(sr, CultureInfo.InvariantCulture))
                 {
-                    sr.ReadLine();
-                    string line = sr.ReadLine();
-                    line = line.Replace("\"", "");
-                    string[] fields;
-                    while (line != null)
+                    var offices = cr.GetRecords<Offices>();
+
+                    foreach (Offices o in offices)
                     {
-                        fields = line.Split(',');
-                        string addressLine2 = fields[4];
-                        if (fields[4] == "NULL") addressLine2 = null;
-                        string state = fields[5];
-                        if (fields[5] == "NULL") state = null;
-                        Offices e = new Offices()
-                        {
-                            OfficeCode = fields[0],
-                            City = fields[1],
-                            Phone = fields[2],
-                            AddressLine1 = fields[3],
-                            AddressLine2 = addressLine2,
-                            State = state,
-                            Country = fields[6],
-                            PostalCode = fields[7],
-                            Territory = fields[8]
-                        };
-                        line = sr.ReadLine();
-                        line = line.Replace("\"", "");
+                        if (AddOffices(o)) sum++;
                     }
                 }
             }
@@ -311,30 +295,19 @@ namespace EntityFramework_CodeFirst.DAO
             try
             {
                 using (StreamReader sr = new StreamReader(ORDER_DETAILS_FILE))
+                using (CsvReader cr = new CsvReader(sr, CultureInfo.InvariantCulture))
                 {
-                    sr.ReadLine();
-                    string line = sr.ReadLine();
-                    line = line.Replace("\"", "");
-                    string[] fields;
-                    while (line != null)
+                    var orderDetails = cr.GetRecords<OrderDetails>();
+
+                    foreach (OrderDetails od in orderDetails)
                     {
-                        fields = line.Split(',');
-                        OrderDetails e = new OrderDetails()
-                        {
-                            OrderNumber = Convert.ToInt32(fields[0]),
-                            ProductCode = fields[1],
-                            QuantityOrdered = Convert.ToInt32(fields[2]),
-                            PriceEach = Convert.ToDouble(fields[3]),
-                            OrderLineNumber = short.Parse(fields[4])
-                        };
-                        line = sr.ReadLine();
-                        line = line.Replace("\"", "");
+                        if (AddOrderDetails(od)) sum++;
                     }
                 }
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.Source);
             }
             return sum;
         }
@@ -351,7 +324,7 @@ namespace EntityFramework_CodeFirst.DAO
 
                     foreach (Orders o in orders)
                     {
-                        AddOrders(o);
+                        if (AddOrders(o)) sum++;
                     }
                 }
             }
@@ -368,24 +341,13 @@ namespace EntityFramework_CodeFirst.DAO
             try
             {
                 using (StreamReader sr = new StreamReader(PAYMENTS_FILE))
+                using (CsvReader cr = new CsvReader(sr, CultureInfo.InvariantCulture))
                 {
-                    sr.ReadLine();
-                    string line = sr.ReadLine();
-                    line = line.Replace("\"", "");
-                    string[] fields;
-                    while (line != null)
+                    var payments = cr.GetRecords<Payments>();
+
+                    foreach (Payments p in payments)
                     {
-                        fields = line.Split(',');
-                        Payments p = new Payments()
-                        {
-                            CustomerNumber = Convert.ToInt32(fields[0]),
-                            CheckNumber = fields[1],
-                            PaymentDate = DateTime.Parse(fields[2]),
-                            Amount = Convert.ToDouble(fields[3])
-                        };
                         if (AddPayments(p)) sum++;
-                        line = sr.ReadLine();
-                        line = line.Replace("\"", "");
                     }
                 }
             }
@@ -408,7 +370,7 @@ namespace EntityFramework_CodeFirst.DAO
 
                     foreach (ProductLines pl in productLines)
                     {
-                        AddProductLines(pl);
+                        if (AddProductLines(pl)) sum++;
                     }
                 }
             }
@@ -421,7 +383,25 @@ namespace EntityFramework_CodeFirst.DAO
 
         public int ImportProducts()
         {
-            throw new NotImplementedException();
+            int sum = 0;
+            try
+            {
+                using (StreamReader sr = new StreamReader(PRODUCTS_FILE))
+                using (CsvReader cr = new CsvReader(sr, CultureInfo.InvariantCulture))
+                {
+                    var products = cr.GetRecords<Products>();
+
+                    foreach (Products p in products)
+                    {
+                        if (AddProducts(p)) sum++;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Source);
+            }
+            return sum;
         }
     }
 }
