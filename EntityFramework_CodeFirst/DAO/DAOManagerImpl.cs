@@ -1,4 +1,4 @@
-﻿using EntityFramework_CodeFirst.MODEL;
+using EntityFramework_CodeFirst.MODEL;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,6 +10,21 @@ namespace EntityFramework_CodeFirst.DAO
 {
     public class DAOManagerImpl : IDAOManager
     {
+        private const string PRODUCT_LINES_FILE = "PRODUCTLINES.CSV";
+        private const string PRODUCTS_FILE = "PRODUCTS.CSV";
+        private const string OFFICES_FILE = "OFFICES.CSV";
+        private const string EMPLOYEES_FILE = "EMPLOYEES.CSV";
+        private const string CUSTOMERS_FILE = "CUSTOMERS.CSV";
+        private const string PAYMENTS_FILE = "PAYMENTS.CSV";
+        private const string ORDERS_FILE = "ORDERS.CSV";
+        private const string ORDER_DETAILS_FILE = "ORDERDETAILS.CSV";
+
+        private ModelsClassicsDbContext context;
+        public DAOManagerImpl() 
+        { 
+            this.context = new ModelsClassicsDbContext();
+        }
+        
         public bool AddCustomers(Customers oneCustomers)
         {
             throw new NotImplementedException();
