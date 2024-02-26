@@ -30,14 +30,20 @@ namespace EntityFramework_CodeFirst.DAO
 
         public bool AddCustomers(Customers oneCustomers)
         {
-            if (oneCustomers == null) throw new Exception("Parameter is null");
-            
             bool done = false;
-
-            if (this.context.Customers.Find(oneCustomers.CustomerNumber) == null)
+            try
             {
-                this.context.Customers.Add(oneCustomers);
-                done = context.SaveChanges() > 0;
+                if (oneCustomers == null) throw new Exception("Parameter is null");
+
+                if (this.context.Customers.Find(oneCustomers.CustomerNumber) == null)
+                {
+                    this.context.Customers.Add(oneCustomers);
+                    done = context.SaveChanges() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+
             }
 
             return done;
@@ -45,14 +51,21 @@ namespace EntityFramework_CodeFirst.DAO
 
         public bool AddEmployees(Employees oneEmployees)
         {
-            if (oneEmployees == null) throw new Exception("Parameter is null");
-
             bool done = false;
 
-            if (this.context.Employees.Find(oneEmployees.EmployeeNumber) == null)
+            try
             {
-                this.context.Employees.Add(oneEmployees);
-                done = context.SaveChanges() > 0;
+                if (oneEmployees == null) throw new Exception("Parameter is null");
+
+                if (this.context.Employees.Find(oneEmployees.EmployeeNumber) == null)
+                {
+                    this.context.Employees.Add(oneEmployees);
+                    done = context.SaveChanges() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                
             }
 
             return done;
@@ -60,14 +73,22 @@ namespace EntityFramework_CodeFirst.DAO
 
         public bool AddOffices(Offices oneOffices)
         {
-            if (oneOffices == null) throw new Exception("Parameter is null");
-
             bool done = false;
 
-            if (this.context.Offices.Find(oneOffices.OfficeCode) == null)
+            try
             {
-                this.context.Offices.Add(oneOffices);
-                done = context.SaveChanges() > 0;
+                if (oneOffices == null) throw new Exception("Parameter is null");
+
+
+                if (this.context.Offices.Find(oneOffices.OfficeCode) == null)
+                {
+                    this.context.Offices.Add(oneOffices);
+                    done = context.SaveChanges() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+
             }
 
             return done;
@@ -75,14 +96,22 @@ namespace EntityFramework_CodeFirst.DAO
 
         public bool AddOrderDetails(OrderDetails oneOrderDetails)
         {
-            if (oneOrderDetails == null) throw new Exception("Parameter is null");
-
             bool done = false;
 
-            if (this.context.OrderDetails.Find(oneOrderDetails.OrderNumber, oneOrderDetails.ProductCode) == null)
+            try
             {
-                this.context.OrderDetails.Add(oneOrderDetails);
-                done = context.SaveChanges() > 0;
+                if (oneOrderDetails == null) throw new Exception("Parameter is null");
+
+
+                if (this.context.OrderDetails.Find(oneOrderDetails.OrderNumber, oneOrderDetails.ProductCode) == null)
+                {
+                    this.context.OrderDetails.Add(oneOrderDetails);
+                    done = context.SaveChanges() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+
             }
 
             return done;
@@ -90,14 +119,21 @@ namespace EntityFramework_CodeFirst.DAO
 
         public bool AddOrders(Orders oneOrders)
         {
-            if (oneOrders == null) throw new Exception("Parameter is null");
-
             bool done = false;
 
-            if (this.context.Orders.Find(oneOrders.OrderNumber) == null)
+            try
             {
-                this.context.Orders.Add(oneOrders);
-                done = context.SaveChanges() > 0;
+                if (oneOrders == null) throw new Exception("Parameter is null");
+
+                if (this.context.Orders.Find(oneOrders.OrderNumber) == null)
+                {
+                    this.context.Orders.Add(oneOrders);
+                    done = context.SaveChanges() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+
             }
 
             return done;
@@ -105,14 +141,21 @@ namespace EntityFramework_CodeFirst.DAO
 
         public bool AddPayments(Payments onePayment)
         {
-            if (onePayment == null) throw new Exception("Parameter is null");
-
             bool done = false;
 
-            if (this.context.Payments.Find(onePayment.CustomerNumber, onePayment.CheckNumber) == null)
+            try
             {
-                this.context.Payments.Add(onePayment);
-                done = context.SaveChanges() > 0;
+                if (onePayment == null) throw new Exception("Parameter is null");
+
+                if (this.context.Payments.Find(onePayment.CustomerNumber, onePayment.CheckNumber) == null)
+                {
+                    this.context.Payments.Add(onePayment);
+                    done = context.SaveChanges() > 0;
+                }
+            }
+            catch(Exception ex)
+            {
+
             }
 
             return done;
@@ -120,14 +163,21 @@ namespace EntityFramework_CodeFirst.DAO
 
         public bool AddProductLines(ProductLines oneProductLines)
         {
-            if (oneProductLines == null) throw new Exception("Parameter is null");
-
             bool done = false;
 
-            if (this.context.ProductLines.Find(oneProductLines.ProductLine) == null)
+            try
             {
-                this.context.ProductLines.Add(oneProductLines);
-                done = context.SaveChanges() > 0;
+                if (oneProductLines == null) throw new Exception("Parameter is null");
+
+                if (this.context.ProductLines.Find(oneProductLines.ProductLine) == null)
+                {
+                    this.context.ProductLines.Add(oneProductLines);
+                    done = context.SaveChanges() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+
             }
 
             return done;
@@ -135,16 +185,22 @@ namespace EntityFramework_CodeFirst.DAO
 
         public bool AddProducts(Products oneProducts)
         {
-            if (oneProducts == null) throw new Exception("Parameter is null");
-
             bool done = false;
 
-            if (this.context.Products.Find(oneProducts.ProductCode) == null)
+            try
             {
-                this.context.Products.Add(oneProducts);
-                done = context.SaveChanges() > 0;
-            }
+                if (oneProducts == null) throw new Exception("Parameter is null");
 
+                if (this.context.Products.Find(oneProducts.ProductCode) == null)
+                {
+                    this.context.Products.Add(oneProducts);
+                    done = context.SaveChanges() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
             return done;
         }
 
@@ -207,7 +263,7 @@ namespace EntityFramework_CodeFirst.DAO
             int sum = 0;
             try
             {
-                using (StreamReader sr = new StreamReader(EMPLOYEES_FILE))
+                using (StreamReader sr = new StreamReader(OFFICES_FILE))
                 {
                     sr.ReadLine();
                     string line = sr.ReadLine();
@@ -247,7 +303,7 @@ namespace EntityFramework_CodeFirst.DAO
             int sum = 0;
             try
             {
-                using (StreamReader sr = new StreamReader(EMPLOYEES_FILE))
+                using (StreamReader sr = new StreamReader(ORDER_DETAILS_FILE))
                 {
                     sr.ReadLine();
                     string line = sr.ReadLine();
