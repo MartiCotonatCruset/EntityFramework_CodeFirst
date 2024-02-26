@@ -1,4 +1,5 @@
 using EntityFramework_CodeFirst.MODEL;
+using Microsoft.Xaml.Behaviors.Media;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -96,17 +97,111 @@ namespace EntityFramework_CodeFirst.DAO
 
         public int ImportEmployees()
         {
-            throw new NotImplementedException();
+            int sum = 0;
+            try
+            {
+                using (StreamReader sr = new StreamReader(EMPLOYEES_FILE))
+                {
+                    sr.ReadLine();
+                    string line = sr.ReadLine();
+                    string[] fields;
+                    while (line != null)
+                    {
+                        fields = line.Split(',');
+                        string reportsTo = fields[6];
+                        if (fields[6] == "NULL") reportsTo = null;
+                        Employees e = new Employees()
+                        {
+                            EmployeeNumber = Convert.ToInt32(fields[0]),
+                            LastName = fields[1],
+                            FirstName = fields[2],
+                            Extension = fields[3],
+                            Email = fields[4],
+                            OfficeCode = fields[5],
+                            ReportsTo = Convert.ToInt32(reportsTo),
+                            JobTitle = fields[7],
+                        };
+                        line = sr.ReadLine();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return sum;
         }
 
         public int ImportOffices()
         {
-            throw new NotImplementedException();
+            int sum = 0;
+            try
+            {
+                using (StreamReader sr = new StreamReader(EMPLOYEES_FILE))
+                {
+                    sr.ReadLine();
+                    string line = sr.ReadLine();
+                    string[] fields;
+                    while (line != null)
+                    {
+                        fields = line.Split(',');
+                        string addressLine2 = fields[4];
+                        if (fields[4] == "NULL") addressLine2 = null;
+                        string state = fields[5];
+                        if (fields[5] == "NULL") state = null;
+                        Offices e = new Offices()
+                        {
+                            OfficeCode = fields[0],
+                            City = fields[1],
+                            Phone = fields[2],
+                            AddressLine1 = fields[3],
+                            AddressLine2 = addressLine2,
+                            State = state,
+                            Country = fields[6],
+                            PostalCode = fields[7],
+                            Territory = fields[8]
+                        };
+                        line = sr.ReadLine();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return sum;
         }
 
         public int ImportOrderDetails()
         {
-            throw new NotImplementedException();
+            int sum = 0;
+            try
+            {
+                using (StreamReader sr = new StreamReader(EMPLOYEES_FILE))
+                {
+                    sr.ReadLine();
+                    string line = sr.ReadLine();
+                    string[] fields;
+                    while (line != null)
+                    {
+                        fields = line.Split(',');
+                        OrderDetails e = new OrderDetails()
+                        {
+                            OrderNumber = Convert.ToInt32(fields[0]),
+                            ProductCode = fields[1],
+                            QuantityOrdered = Convert.ToInt32(fields[2]),
+                            PriceEach = Convert.ToDouble(fields[3]),
+                            OrderLineNumber = short.Parse(fields[4])
+                        };
+                        line = sr.ReadLine();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return sum;
         }
 
         public int ImportOrders()
@@ -130,42 +225,25 @@ namespace EntityFramework_CodeFirst.DAO
                         Payments p = new Payments()
                         {
                             CustomerNumber = Convert.ToInt32(fields[0]),
-                            CheckNumber = fields[1], 
-                            PaymentDate = DateTime.Parse(fields[2]), 
+                            CheckNumber = fields[1],
+                            PaymentDate = DateTime.Parse(fields[2]),
                             Amount = Convert.ToDouble(fields[3])
                         };
                         if (AddPayments(p)) sum++;
+                        line = sr.ReadLine();
                     }
                 }
             }
             catch (Exception ex)
             {
-                
+
             }
             return sum;
         }
 
         public int ImportProductLines()
         {
-            int sum = 0;
-            try
-            {
-                using (StreamReader sr = new StreamReader(PRODUCT_LINES_FILE))
-                {
-                    sr.ReadLine();
-                    string line = sr.ReadLine();
-                    string[] fields;
-                    while (line != null)
-                    {
-                        fields = line.Split("\"");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
-            return sum;
+            throw new NotImplementedException();
         }
 
         public int ImportProducts()
