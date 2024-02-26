@@ -1,4 +1,5 @@
-﻿using EntityFramework_CodeFirst.MODEL;
+﻿using EntityFramework_CodeFirst.DAO;
+using EntityFramework_CodeFirst.MODEL;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,15 +26,20 @@ namespace EntityFramework_CodeFirst
         List<Payments> payments = new List<Payments>();
         List<Orders> orders = new List<Orders>();
         List<OrderDetails> orderDetails = new List<OrderDetails>();
+
+        IDAOManager dao;
+
         public MainWindow()
         {
             InitializeComponent();
-            ImportTables();
+            this.dao = DAOFactory.createDAOManager();
+
+            ImportTables(dao);
         }
 
-        public void ImportTables()
+        public void ImportTables(IDAOManager dao)
         {
-
+            dao.ImportPayments();
         }
     }
 }

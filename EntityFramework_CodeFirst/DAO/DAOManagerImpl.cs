@@ -43,7 +43,7 @@ namespace EntityFramework_CodeFirst.DAO
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.Source);
             }
 
             return done;
@@ -65,7 +65,7 @@ namespace EntityFramework_CodeFirst.DAO
             }
             catch (Exception ex)
             {
-                
+                Console.WriteLine(ex.Source);
             }
 
             return done;
@@ -88,7 +88,7 @@ namespace EntityFramework_CodeFirst.DAO
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.Source);
             }
 
             return done;
@@ -111,7 +111,7 @@ namespace EntityFramework_CodeFirst.DAO
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.Source);
             }
 
             return done;
@@ -133,7 +133,7 @@ namespace EntityFramework_CodeFirst.DAO
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.Source);
             }
 
             return done;
@@ -153,9 +153,9 @@ namespace EntityFramework_CodeFirst.DAO
                     done = context.SaveChanges() > 0;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-
+                Console.WriteLine(ex.Source);
             }
 
             return done;
@@ -177,7 +177,7 @@ namespace EntityFramework_CodeFirst.DAO
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.Source);
             }
 
             return done;
@@ -249,11 +249,12 @@ namespace EntityFramework_CodeFirst.DAO
                         };
                         line = sr.ReadLine();
                     }
+
                 }
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.Source);
             }
             return sum;
         }
@@ -293,7 +294,7 @@ namespace EntityFramework_CodeFirst.DAO
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.Source);
             }
             return sum;
         }
@@ -325,7 +326,7 @@ namespace EntityFramework_CodeFirst.DAO
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.Source);
             }
             return sum;
         }
@@ -362,7 +363,7 @@ namespace EntityFramework_CodeFirst.DAO
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.Source);
             }
             return sum;
         }
