@@ -407,5 +407,47 @@ namespace EntityFramework_CodeFirst.DAO
             return sum;
         }
         #endregion
+
+        #region QUERIES
+        public List<ProductLines> GetProductLines()
+        {
+            return context.ProductLines.ToList();
+        }
+
+        public List<Products> GetProducts()
+        {
+            return context.Products.ToList();
+        }
+
+        public List<Offices> GetOffices()
+        {
+            return context.Offices.ToList();
+        }
+
+        public List<Employees> GetEmployees()
+        {
+            return context.Employees.ToList();
+        }
+
+        public List<Customers> GetCustomers()
+        {
+            return context.Customers.ToList();
+        }
+
+        public List<Payments> GetPayments()
+        {
+            return context.Payments.ToList();
+        }
+
+        public List<Orders> GetOrders()
+        {
+            return context.Orders.ToList();
+        }
+
+        public List<OrderDetails> GetOrderDetails()
+        {
+            return context.OrderDetails.ToList();
+        }
+        #endregion
     }
 }

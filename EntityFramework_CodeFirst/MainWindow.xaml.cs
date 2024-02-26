@@ -34,12 +34,28 @@ namespace EntityFramework_CodeFirst
             InitializeComponent();
             this.dao = DAOFactory.createDAOManager();
 
-            ImportTables(dao);
+            dao.ImportAll();
+            GetAllTables();
         }
 
-        public void ImportTables(IDAOManager dao)
+        private void GetAllTables()
         {
-            dao.ImportProductLines();
+            lines = dao.GetProductLines();
+            dgProdcutLines.ItemsSource = lines;
+            products = dao.GetProducts();
+            dgProdcuts.ItemsSource = products;
+            offices = dao.GetOffices();
+            dgOffices.ItemsSource = offices;
+            employees = dao.GetEmployees();
+            dgEmployees.ItemsSource = employees;
+            customers = dao.GetCustomers();
+            dgCustomer.ItemsSource = customers;
+            payments = dao.GetPayments();
+            dgPayments.ItemsSource = payments;
+            orders = dao.GetOrders();
+            dgOrders.ItemsSource = orders;
+            orderDetails = dao.GetOrderDetails();
+            dgOrderDetails.ItemsSource = orderDetails;
         }
     }
 }
