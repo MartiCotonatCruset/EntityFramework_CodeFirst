@@ -20,7 +20,7 @@ namespace EntityFramework_CodeFirst.DAO
         private const string CUSTOMERS_FILE = "CUSTOMERS.CSV";
         private const string PAYMENTS_FILE = "PAYMENTS.CSV";
         private const string ORDERS_FILE = "ORDERS.CSV";
-        private const string ORDER_DETAILS_FILE = "ORDERDETAILS.CSV"; 
+        private const string ORDER_DETAILS_FILE = "ORDERDETAILS.CSV";
 
         private ModelsClassicsDbContext context;
         public DAOManagerImpl()
@@ -30,52 +30,122 @@ namespace EntityFramework_CodeFirst.DAO
 
         public bool AddCustomers(Customers oneCustomers)
         {
-            throw new NotImplementedException();
+            if (oneCustomers == null) throw new Exception("Parameter is null");
+            
+            bool done = false;
+
+            if (this.context.Customers.Find(oneCustomers.CustomerNumber) == null)
+            {
+                this.context.Customers.Add(oneCustomers);
+                done = context.SaveChanges() > 0;
+            }
+
+            return done;
         }
 
         public bool AddEmployees(Employees oneEmployees)
         {
-            throw new NotImplementedException();
+            if (oneEmployees == null) throw new Exception("Parameter is null");
+
+            bool done = false;
+
+            if (this.context.Employees.Find(oneEmployees.EmployeeNumber) == null)
+            {
+                this.context.Employees.Add(oneEmployees);
+                done = context.SaveChanges() > 0;
+            }
+
+            return done;
         }
 
         public bool AddOffices(Offices oneOffices)
         {
-            throw new NotImplementedException();
+            if (oneOffices == null) throw new Exception("Parameter is null");
+
+            bool done = false;
+
+            if (this.context.Offices.Find(oneOffices.OfficeCode) == null)
+            {
+                this.context.Offices.Add(oneOffices);
+                done = context.SaveChanges() > 0;
+            }
+
+            return done;
         }
 
         public bool AddOrderDetails(OrderDetails oneOrderDetails)
         {
-            throw new NotImplementedException();
+            if (oneOrderDetails == null) throw new Exception("Parameter is null");
+
+            bool done = false;
+
+            if (this.context.OrderDetails.Find(oneOrderDetails.OrderNumber, oneOrderDetails.ProductCode) == null)
+            {
+                this.context.OrderDetails.Add(oneOrderDetails);
+                done = context.SaveChanges() > 0;
+            }
+
+            return done;
         }
 
         public bool AddOrders(Orders oneOrders)
         {
-            throw new NotImplementedException();
+            if (oneOrders == null) throw new Exception("Parameter is null");
+
+            bool done = false;
+
+            if (this.context.Orders.Find(oneOrders.OrderNumber) == null)
+            {
+                this.context.Orders.Add(oneOrders);
+                done = context.SaveChanges() > 0;
+            }
+
+            return done;
         }
 
         public bool AddPayments(Payments onePayment)
         {
-            bool done = true;
-            try
+            if (onePayment == null) throw new Exception("Parameter is null");
+
+            bool done = false;
+
+            if (this.context.Payments.Find(onePayment.CustomerNumber, onePayment.CheckNumber) == null)
             {
-                context.Payments.Add(onePayment);
-                context.SaveChanges();
+                this.context.Payments.Add(onePayment);
+                done = context.SaveChanges() > 0;
             }
-            catch (Exception ex)
-            {
-                done = false;
-            }
+
             return done;
         }
 
         public bool AddProductLines(ProductLines oneProductLines)
         {
-            throw new NotImplementedException();
+            if (oneProductLines == null) throw new Exception("Parameter is null");
+
+            bool done = false;
+
+            if (this.context.ProductLines.Find(oneProductLines.ProductLine) == null)
+            {
+                this.context.ProductLines.Add(oneProductLines);
+                done = context.SaveChanges() > 0;
+            }
+
+            return done;
         }
 
         public bool AddProducts(Products oneProducts)
         {
-            throw new NotImplementedException();
+            if (oneProducts == null) throw new Exception("Parameter is null");
+
+            bool done = false;
+
+            if (this.context.Products.Find(oneProducts.ProductCode) == null)
+            {
+                this.context.Products.Add(oneProducts);
+                done = context.SaveChanges() > 0;
+            }
+
+            return done;
         }
 
         public void ImportAll()
