@@ -233,6 +233,7 @@ namespace EntityFramework_CodeFirst.DAO
                 {
                     sr.ReadLine();
                     string line = sr.ReadLine();
+                    line = line.Replace("\"", "");
                     string[] fields;
                     while (line != null)
                     {
@@ -251,6 +252,7 @@ namespace EntityFramework_CodeFirst.DAO
                             JobTitle = fields[7],
                         };
                         line = sr.ReadLine();
+                        line = line.Replace("\"", "");
                     }
                 }
             }
@@ -270,6 +272,7 @@ namespace EntityFramework_CodeFirst.DAO
                 {
                     sr.ReadLine();
                     string line = sr.ReadLine();
+                    line = line.Replace("\"", "");
                     string[] fields;
                     while (line != null)
                     {
@@ -291,6 +294,7 @@ namespace EntityFramework_CodeFirst.DAO
                             Territory = fields[8]
                         };
                         line = sr.ReadLine();
+                        line = line.Replace("\"", "");
                     }
                 }
             }
@@ -310,6 +314,7 @@ namespace EntityFramework_CodeFirst.DAO
                 {
                     sr.ReadLine();
                     string line = sr.ReadLine();
+                    line = line.Replace("\"", "");
                     string[] fields;
                     while (line != null)
                     {
@@ -323,6 +328,7 @@ namespace EntityFramework_CodeFirst.DAO
                             OrderLineNumber = short.Parse(fields[4])
                         };
                         line = sr.ReadLine();
+                        line = line.Replace("\"", "");
                     }
                 }
             }
@@ -365,6 +371,7 @@ namespace EntityFramework_CodeFirst.DAO
                 {
                     sr.ReadLine();
                     string line = sr.ReadLine();
+                    line = line.Replace("\"", "");
                     string[] fields;
                     while (line != null)
                     {
@@ -378,6 +385,7 @@ namespace EntityFramework_CodeFirst.DAO
                         };
                         if (AddPayments(p)) sum++;
                         line = sr.ReadLine();
+                        line = line.Replace("\"", "");
                     }
                 }
             }
