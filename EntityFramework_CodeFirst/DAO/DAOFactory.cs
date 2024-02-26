@@ -8,6 +8,9 @@ namespace EntityFramework_CodeFirst.DAO
 {
     public class DAOFactory
     {
-
+        public static IDAOManager createDAOManager()
+        {
+            return new DAOManagerImpl();
+        }
     }
 }

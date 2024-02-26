@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EntityFramework_CodeFirst.DAO
 {
-    public class DAOManagerImpl
+    public class DAOManagerImpl : IDAOManager
     {
 
     }
