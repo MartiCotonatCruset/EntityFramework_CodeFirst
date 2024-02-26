@@ -249,7 +249,6 @@ namespace EntityFramework_CodeFirst.DAO
                         };
                         line = sr.ReadLine();
                     }
-
                 }
             }
             catch (Exception ex)
