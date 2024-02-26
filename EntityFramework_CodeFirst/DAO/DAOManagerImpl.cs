@@ -1,9 +1,12 @@
 ﻿using EntityFramework_CodeFirst.MODEL;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace EntityFramework_CodeFirst.DAO
 {
@@ -16,7 +19,14 @@ namespace EntityFramework_CodeFirst.DAO
         private const string CUSTOMERS_FILE = "CUSTOMERS.CSV";
         private const string PAYMENTS_FILE = "PAYMENTS.CSV";
         private const string ORDERS_FILE = "ORDERS.CSV";
-        private const string ORDER_DETAILS_FILE = "ORDERDETAILS.CSV";
+        private const string ORDER_DETAILS_FILE = "ORDERDETAILS.CSV"; 
+
+        private ModelsClassicsDbContext context;
+        public DAOManagerImpl()
+        {
+            this.context = new ModelsClassicsDbContext();
+        }
+
         public bool AddCustomers(Customers oneCustomers)
         {
             throw new NotImplementedException();
@@ -42,9 +52,19 @@ namespace EntityFramework_CodeFirst.DAO
             throw new NotImplementedException();
         }
 
-        public bool AddPayments(Payments onePayments)
+        public bool AddPayments(Payments onePayment)
         {
-            throw new NotImplementedException();
+            bool done = true;
+            try
+            {
+                context.Payments.Add(onePayment);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                done = false;
+            }
+            return done;
         }
 
         public bool AddProductLines(ProductLines oneProductLines)
@@ -96,12 +116,56 @@ namespace EntityFramework_CodeFirst.DAO
 
         public int ImportPayments()
         {
-            throw new NotImplementedException();
+            int sum = 0;
+            try
+            {
+                using (StreamReader sr = new StreamReader(PAYMENTS_FILE))
+                {
+                    sr.ReadLine();
+                    string line = sr.ReadLine();
+                    string[] fields;
+                    while (line != null)
+                    {
+                        fields = line.Split(',');
+                        Payments p = new Payments()
+                        {
+                            CustomerNumber = Convert.ToInt32(fields[0]),
+                            CheckNumber = fields[1], 
+                            PaymentDate = DateTime.Parse(fields[2]), 
+                            Amount = Convert.ToDouble(fields[3])
+                        };
+                        if (AddPayments(p)) sum++;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                
+            }
+            return sum;
         }
 
         public int ImportProductLines()
         {
-            throw new NotImplementedException();
+            int sum = 0;
+            try
+            {
+                using (StreamReader sr = new StreamReader(PRODUCT_LINES_FILE))
+                {
+                    sr.ReadLine();
+                    string line = sr.ReadLine();
+                    string[] fields;
+                    while (line != null)
+                    {
+                        fields = line.Split("\"");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return sum;
         }
 
         public int ImportProducts()
