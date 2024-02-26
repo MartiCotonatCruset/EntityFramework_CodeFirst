@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace EntityFramework_CodeFirst.MODEL
 {
     [Table("CUSTOMERS")]
-    class Customers
+    public class Customers
     {
         [Key]
         public int CustomerNumber { get; set; }

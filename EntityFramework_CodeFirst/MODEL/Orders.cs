@@ -10,7 +10,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace EntityFramework_CodeFirst.MODEL
 {
     [Table("ORDERS")]
-    class Orders
+    public class Orders
     {
         [Key]
         public int OrderNumber { get; set; }

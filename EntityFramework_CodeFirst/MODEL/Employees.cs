@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace EntityFramework_CodeFirst.MODEL
 {
     [Table("EMPLOYEES")]
-    class Employees
+    public class Employees
     {
         [Key]
         public int EmployeeNumber { get; set; }

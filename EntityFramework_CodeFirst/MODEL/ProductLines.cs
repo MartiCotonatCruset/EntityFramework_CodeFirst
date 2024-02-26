@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace EntityFramework_CodeFirst.MODEL
 {
     [Table("PRODUCTLINES")]
-    class ProductLines
+    public class ProductLines
     {
         [Key]
         [Column(TypeName = "varchar(50)")]

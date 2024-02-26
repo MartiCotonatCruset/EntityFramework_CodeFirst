@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace EntityFramework_CodeFirst.MODEL
 {
     [Table("ORDERDETAILS")]
-    class OrderDetails
+    public class OrderDetails
     {
         [ForeignKey("Orders")]
         public int OrderNumber { get; set; }
