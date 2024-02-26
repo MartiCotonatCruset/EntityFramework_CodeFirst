@@ -202,7 +202,7 @@ namespace EntityFramework_CodeFirst.DAO
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.Source);
             }
             return done;
         }
