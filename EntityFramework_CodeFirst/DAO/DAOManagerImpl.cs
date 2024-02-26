@@ -32,7 +32,8 @@ namespace EntityFramework_CodeFirst.DAO
             this.context = new ModelsClassicsDbContext();
         }
 
-        public bool AddCustomers(Customers oneCustomers)
+        #region ADDS
+        private bool AddCustomers(Customers oneCustomers)
         {
             bool done = false;
             try
@@ -53,7 +54,7 @@ namespace EntityFramework_CodeFirst.DAO
             return done;
         }
 
-        public bool AddEmployees(Employees oneEmployees)
+        private bool AddEmployees(Employees oneEmployees)
         {
             bool done = false;
 
@@ -75,7 +76,7 @@ namespace EntityFramework_CodeFirst.DAO
             return done;
         }
 
-        public bool AddOffices(Offices oneOffices)
+        private bool AddOffices(Offices oneOffices)
         {
             bool done = false;
 
@@ -98,7 +99,7 @@ namespace EntityFramework_CodeFirst.DAO
             return done;
         }
 
-        public bool AddOrderDetails(OrderDetails oneOrderDetails)
+        private bool AddOrderDetails(OrderDetails oneOrderDetails)
         {
             bool done = false;
 
@@ -121,7 +122,7 @@ namespace EntityFramework_CodeFirst.DAO
             return done;
         }
 
-        public bool AddOrders(Orders oneOrders)
+        private bool AddOrders(Orders oneOrders)
         {
             bool done = false;
 
@@ -143,7 +144,7 @@ namespace EntityFramework_CodeFirst.DAO
             return done;
         }
 
-        public bool AddPayments(Payments onePayment)
+        private bool AddPayments(Payments onePayment)
         {
             bool done = false;
 
@@ -165,7 +166,7 @@ namespace EntityFramework_CodeFirst.DAO
             return done;
         }
 
-        public bool AddProductLines(ProductLines oneProductLines)
+        private bool AddProductLines(ProductLines oneProductLines)
         {
             bool done = false;
 
@@ -187,7 +188,7 @@ namespace EntityFramework_CodeFirst.DAO
             return done;
         }
 
-        public bool AddProducts(Products oneProducts)
+        private bool AddProducts(Products oneProducts)
         {
             bool done = false;
 
@@ -207,7 +208,9 @@ namespace EntityFramework_CodeFirst.DAO
             }
             return done;
         }
+        #endregion
 
+        #region IMPORTS
         public void ImportAll()
         {
             ImportProductLines();
@@ -220,7 +223,7 @@ namespace EntityFramework_CodeFirst.DAO
             ImportOrderDetails();
         }
 
-        public int ImportCustomers()
+        private int ImportCustomers()
         {
             int sum = 0;
             try
@@ -243,7 +246,7 @@ namespace EntityFramework_CodeFirst.DAO
             return sum;
         }
 
-        public int ImportEmployees()
+        private int ImportEmployees()
         {
             int sum = 0;
             try
@@ -266,7 +269,7 @@ namespace EntityFramework_CodeFirst.DAO
             return sum;
         }
 
-        public int ImportOffices()
+        private int ImportOffices()
         {
             int sum = 0;
             try
@@ -289,7 +292,7 @@ namespace EntityFramework_CodeFirst.DAO
             return sum;
         }
 
-        public int ImportOrderDetails()
+        private int ImportOrderDetails()
         {
             int sum = 0;
             try
@@ -312,7 +315,7 @@ namespace EntityFramework_CodeFirst.DAO
             return sum;
         }
 
-        public int ImportOrders()
+        private int ImportOrders()
         {
             int sum = 0;
             try
@@ -335,7 +338,7 @@ namespace EntityFramework_CodeFirst.DAO
             return sum;
         }
 
-        public int ImportPayments()
+        private int ImportPayments()
         {
             int sum = 0;
             try
@@ -358,7 +361,7 @@ namespace EntityFramework_CodeFirst.DAO
             return sum;
         }
 
-        public int ImportProductLines()
+        private int ImportProductLines()
         {
             int sum = 0;
             try
@@ -381,7 +384,7 @@ namespace EntityFramework_CodeFirst.DAO
             return sum;
         }
 
-        public int ImportProducts()
+        private int ImportProducts()
         {
             int sum = 0;
             try
@@ -403,5 +406,6 @@ namespace EntityFramework_CodeFirst.DAO
             }
             return sum;
         }
+        #endregion
     }
 }
