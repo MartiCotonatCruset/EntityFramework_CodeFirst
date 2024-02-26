@@ -248,7 +248,8 @@ namespace EntityFramework_CodeFirst.DAO
                             JobTitle = fields[7],
                         };
                         line = sr.ReadLine();
-                    }
+                    } 
+
                 }
             }
             catch (Exception ex)
