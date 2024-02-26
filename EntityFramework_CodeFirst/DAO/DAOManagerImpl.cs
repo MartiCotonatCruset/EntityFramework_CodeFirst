@@ -390,7 +390,25 @@ namespace EntityFramework_CodeFirst.DAO
 
         public int ImportProductLines()
         {
-            throw new NotImplementedException();
+            int sum = 0;
+            try
+            {
+                using (StreamReader sr = new StreamReader(PRODUCT_LINES_FILE))
+                using (CsvReader cr = new CsvReader(sr, CultureInfo.InvariantCulture))
+                {
+                    var productLines = cr.GetRecords<ProductLines>();
+
+                    foreach (ProductLines pl in productLines)
+                    {
+                        AddProductLines(pl);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Source);
+            }
+            return sum;
         }
 
         public int ImportProducts()
