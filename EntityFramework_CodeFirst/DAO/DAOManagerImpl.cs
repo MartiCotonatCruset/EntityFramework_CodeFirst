@@ -1,7 +1,10 @@
+using CsvHelper;
+using CsvHelper.Configuration;
 using EntityFramework_CodeFirst.MODEL;
 using Microsoft.Xaml.Behaviors.Media;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -326,14 +329,32 @@ namespace EntityFramework_CodeFirst.DAO
             }
             catch (Exception ex)
             {
-
+                
             }
             return sum;
         }
 
         public int ImportOrders()
         {
-            throw new NotImplementedException();
+            int sum = 0;
+            try
+            {
+                using (StreamReader sr = new StreamReader(ORDERS_FILE))
+                using (CsvReader cr = new CsvReader(sr, CultureInfo.InvariantCulture))
+                {
+                    var orders = cr.GetRecords<Orders>();
+
+                    foreach (Orders o in orders)
+                    {
+                        AddOrders(o);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Source);
+            }
+            return sum;
         }
 
         public int ImportPayments()
