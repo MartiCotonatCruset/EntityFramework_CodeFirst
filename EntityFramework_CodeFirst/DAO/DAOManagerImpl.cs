@@ -42,6 +42,7 @@ namespace EntityFramework_CodeFirst.DAO
 
                 if (this.context.Customers.Find(oneCustomers.CustomerNumber) == null)
                 {
+                    oneCustomers.Employee = this.context.Employees.Find(oneCustomers.SalesRepEmployeeNumber);
                     this.context.Customers.Add(oneCustomers);
                     done = context.SaveChanges() > 0;
                 }
@@ -64,6 +65,7 @@ namespace EntityFramework_CodeFirst.DAO
 
                 if (this.context.Employees.Find(oneEmployees.EmployeeNumber) == null)
                 {
+                    oneEmployees.Offices = this.context.Offices.Find(oneEmployees.OfficeCode);
                     this.context.Employees.Add(oneEmployees);
                     done = context.SaveChanges() > 0;
                 }
@@ -110,6 +112,8 @@ namespace EntityFramework_CodeFirst.DAO
 
                 if (this.context.OrderDetails.Find(oneOrderDetails.OrderNumber, oneOrderDetails.ProductCode) == null)
                 {
+                    oneOrderDetails.Orders = this.context.Orders.Find(oneOrderDetails.OrderNumber);
+                    oneOrderDetails.Products = this.context.Products.Find(oneOrderDetails.ProductCode);
                     this.context.OrderDetails.Add(oneOrderDetails);
                     done = context.SaveChanges() > 0;
                 }
