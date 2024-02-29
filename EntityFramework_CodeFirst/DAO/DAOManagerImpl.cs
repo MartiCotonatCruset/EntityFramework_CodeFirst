@@ -132,6 +132,7 @@ namespace EntityFramework_CodeFirst.DAO
 
                 if (this.context.Orders.Find(oneOrders.OrderNumber) == null)
                 {
+                    oneOrders.Customers = this.context.Customers.Find(oneOrders.CustomerNumber);
                     this.context.Orders.Add(oneOrders);
                     done = context.SaveChanges() > 0;
                 }
@@ -154,6 +155,7 @@ namespace EntityFramework_CodeFirst.DAO
 
                 if (this.context.Payments.Find(onePayment.CustomerNumber, onePayment.CheckNumber) == null)
                 {
+                    onePayment.Customers = this.context.Customers.Find(onePayment.CustomerNumber);
                     this.context.Payments.Add(onePayment);
                     done = context.SaveChanges() > 0;
                 }
@@ -198,6 +200,7 @@ namespace EntityFramework_CodeFirst.DAO
 
                 if (this.context.Products.Find(oneProducts.ProductCode) == null)
                 {
+                    oneProducts.ProductLines = context.ProductLines.Find(oneProducts.ProductLine);
                     this.context.Products.Add(oneProducts);
                     done = context.SaveChanges() > 0;
                 }
@@ -235,6 +238,7 @@ namespace EntityFramework_CodeFirst.DAO
 
                     foreach (Customers c in customers)
                     {
+                        
                         if (AddCustomers(c)) sum++;
                     }
                 }
