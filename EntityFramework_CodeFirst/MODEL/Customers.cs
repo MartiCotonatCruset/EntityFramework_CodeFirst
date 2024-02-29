@@ -54,6 +54,7 @@ namespace EntityFramework_CodeFirst.MODEL
         [Name("creditLimit")]
         public decimal? CreditLimit { get; set; }
 
+        [Ignore]
         public Employees Employee { get; set; }
     }
 }

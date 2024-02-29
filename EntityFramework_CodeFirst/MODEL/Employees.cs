@@ -38,7 +38,9 @@ namespace EntityFramework_CodeFirst.MODEL
         [Name("jobTitle")]
         public string JobTitle { get; set; }
 
+        [Ignore]
         public Offices Offices { get; set; }
+        [Ignore]
         public Employees ReportsToSelfReference {  get; set; }
     }
 }

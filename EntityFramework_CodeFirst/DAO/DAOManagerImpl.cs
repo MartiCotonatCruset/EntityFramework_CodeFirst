@@ -216,11 +216,11 @@ namespace EntityFramework_CodeFirst.DAO
             ImportProductLines();
             ImportProducts();
             ImportOffices();
-            //ImportEmployees();
-            //ImportCustomers();
-            //ImportPayments();
-            //ImportOrders();
-            //ImportOrderDetails();
+            ImportEmployees();
+            ImportCustomers();
+            ImportPayments();
+            ImportOrders();
+            ImportOrderDetails();
         }
 
         private int ImportCustomers()

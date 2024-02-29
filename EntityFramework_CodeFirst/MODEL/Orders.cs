@@ -35,6 +35,7 @@ namespace EntityFramework_CodeFirst.MODEL
         [Name("customerNumber")]
         public int CustomerNumber { get; set; }
 
+        [Ignore]
         public Customers Customers { get; set; }
     }
 }

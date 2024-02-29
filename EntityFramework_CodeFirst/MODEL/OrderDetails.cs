@@ -27,7 +27,9 @@ namespace EntityFramework_CodeFirst.MODEL
         [Name("orderLineNumber")]
         public short OrderLineNumber { get; set; }
 
+        [Ignore]
         public Orders Orders { get; set; }
+        [Ignore]
         public Products Products { get; set; }
     }
 }

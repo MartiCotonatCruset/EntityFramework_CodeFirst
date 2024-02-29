@@ -41,6 +41,7 @@ namespace EntityFramework_CodeFirst.MODEL
         [Name("MSRP")]
         public double MSRP { get; set; }
 
+        [Ignore]
         public ProductLines ProductLines { get; set; }
     }
 }
