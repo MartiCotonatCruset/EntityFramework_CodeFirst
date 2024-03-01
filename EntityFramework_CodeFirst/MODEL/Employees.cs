@@ -41,6 +41,6 @@ namespace EntityFramework_CodeFirst.MODEL
         [Ignore]
         public Offices Offices { get; set; }
         [Ignore]
-        public Employees ReportsToSelfReference {  get; set; }
+        public Employees? ReportsToSelfReference {  get; set; }
     }
 }

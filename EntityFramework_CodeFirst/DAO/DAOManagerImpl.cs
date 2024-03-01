@@ -1,17 +1,8 @@
 using CsvHelper;
-using CsvHelper.Configuration;
 using EntityFramework_CodeFirst.MODEL;
-using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
-using Microsoft.Xaml.Behaviors.Media;
-using System;
-using System.Collections.Generic;
+using Microsoft.VisualBasic.FileIO;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace EntityFramework_CodeFirst.DAO
 {
@@ -223,11 +214,11 @@ namespace EntityFramework_CodeFirst.DAO
             ImportProductLines();
             ImportProducts();
             ImportOffices();
-            ImportEmployees();
-            ImportCustomers();
-            ImportPayments();
-            ImportOrders();
-            ImportOrderDetails();
+            //ImportEmployees();
+            //ImportCustomers();
+            //ImportPayments();
+            //ImportOrders();
+            //ImportOrderDetails();
         }
 
         private int ImportCustomers()
@@ -283,12 +274,36 @@ namespace EntityFramework_CodeFirst.DAO
             try
             {
                 using (StreamReader sr = new StreamReader(OFFICES_FILE))
-                using (CsvReader cr = new CsvReader(sr, CultureInfo.InvariantCulture))
                 {
-                    var offices = cr.GetRecords<Offices>();
-
-                    foreach (Offices o in offices)
+                    string line;
+                    line = sr.ReadLine();
+                    while ((line = sr.ReadLine()) != null)
                     {
+                        string[] values = line.Split(',');
+
+                        string officeCode = values[0].Trim('"');
+                        string city = values[1].Trim('"');
+                        string phone = values[2].Trim('"');
+                        string addressLine1 = values[3].Trim('"');
+                        string addressLine2 = values[4].Trim('"') == "NULL" ? null : values[4].Trim('"');
+                        string state = values[5].Trim('"') == "NULL" ? null : values[5].Trim('"');
+                        string country = values[6].Trim('"');
+                        string postalCode = values[7].Trim('"');
+                        string territory = values[8].Trim('"');
+
+                        Offices o = new Offices
+                        {
+                            OfficeCode = officeCode,
+                            City = city,
+                            Phone = phone,
+                            AddressLine1 = addressLine1,
+                            AddressLine2 = addressLine2,
+                            State = state,
+                            Country = country,
+                            PostalCode = postalCode,
+                            Territory = territory
+                        };
+
                         if (AddOffices(o)) sum++;
                     }
                 }
@@ -374,14 +389,35 @@ namespace EntityFramework_CodeFirst.DAO
             int sum = 0;
             try
             {
-                using (StreamReader sr = new StreamReader(PRODUCT_LINES_FILE))
-                using (CsvReader cr = new CsvReader(sr, CultureInfo.InvariantCulture))
+                using (TextFieldParser parser = new TextFieldParser(PRODUCT_LINES_FILE))
                 {
-                    var productLines = cr.GetRecords<ProductLines>();
+                    parser.SetDelimiters(",");
+                    //QUOTES 
+                    parser.HasFieldsEnclosedInQuotes = true;
 
-                    foreach (ProductLines pl in productLines)
+                    parser.ReadFields();
+                    while (!parser.EndOfData)
                     {
-                        if (AddProductLines(pl)) sum++;
+                        // Read current line fields, handle commas within quotes
+                        string[] fields = parser.ReadFields();
+
+                        if (fields != null && fields.Length == 4)
+                        {
+                            string productLine = fields[0].Trim('"');
+                            string textDescription = fields[1].Trim('"') == "NULL" ? null : fields[1].Trim('"');
+                            string htmlDescription = fields[2].Trim('"') == "NULL" ? null : fields[2].Trim('"');
+                            string image = fields[3].Trim('"') == "NULL" ? null : fields[3].Trim('"');
+
+                            ProductLines pl = new ProductLines
+                            {
+                                ProductLine = productLine,
+                                TextDescription = textDescription,
+                                HtmlDescription = htmlDescription,
+                                Image = image
+                            };
+
+                            if (AddProductLines(pl)) sum++;
+                        }
                     }
                 }
             }
@@ -397,14 +433,44 @@ namespace EntityFramework_CodeFirst.DAO
             int sum = 0;
             try
             {
-                using (StreamReader sr = new StreamReader(PRODUCTS_FILE))
-                using (CsvReader cr = new CsvReader(sr, CultureInfo.InvariantCulture))
+                using (TextFieldParser parser = new TextFieldParser(PRODUCTS_FILE))
                 {
-                    var products = cr.GetRecords<Products>();
+                    parser.SetDelimiters(",");
+                    parser.HasFieldsEnclosedInQuotes = true;
 
-                    foreach (Products p in products)
+                    parser.ReadFields();
+                    while (!parser.EndOfData)
                     {
-                        if (AddProducts(p)) sum++;
+                        // Read current line fields, handle commas within quotes
+                        string[] fields = parser.ReadFields();
+
+                        if (fields != null && fields.Length == 9)
+                        {
+                            string productCode = fields[0].Trim('"');
+                            string productName = fields[1].Trim('"');
+                            string productLine = fields[2].Trim('"');
+                            string productScale = fields[3].Trim('"');
+                            string productVendor = fields[4].Trim('"');
+                            string productDescription = fields[5].Trim('"');
+                            short quantityInStock = Convert.ToInt16(fields[6].Trim('"'));
+                            double buyPrice = Convert.ToDouble(fields[7].Trim('"'));
+                            double msrp = Convert.ToDouble(fields[8].Trim('"'));
+
+                            Products product = new Products
+                            {
+                                ProductCode = productCode,
+                                ProductName = productName,
+                                ProductLine = productLine,
+                                ProductScale = productScale,
+                                ProductVendor = productVendor,
+                                ProductDescription = productDescription,
+                                QuantityInStock = quantityInStock,
+                                BuyPrice = buyPrice,
+                                MSRP = msrp
+                            };
+
+                            if (AddProducts(product)) sum++;
+                        }
                     }
                 }
             }
