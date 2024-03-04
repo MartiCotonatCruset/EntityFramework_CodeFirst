@@ -1,6 +1,8 @@
 using CsvHelper;
 using EntityFramework_CodeFirst.MODEL;
 using Microsoft.VisualBasic.FileIO;
+using Microsoft.Xaml.Behaviors.Core;
+using System.Diagnostics.Metrics;
 using System.Globalization;
 using System.IO;
 
@@ -214,11 +216,11 @@ namespace EntityFramework_CodeFirst.DAO
             ImportProductLines();
             ImportProducts();
             ImportOffices();
-            //ImportEmployees();
-            //ImportCustomers();
-            //ImportPayments();
-            //ImportOrders();
-            //ImportOrderDetails();
+            ImportEmployees();
+            ImportCustomers();
+            ImportPayments();
+            ImportOrders();
+            ImportOrderDetails();
         }
 
         private int ImportCustomers()
@@ -226,15 +228,60 @@ namespace EntityFramework_CodeFirst.DAO
             int sum = 0;
             try
             {
-                using (StreamReader sr = new StreamReader(CUSTOMERS_FILE))
-                using (CsvReader cr = new CsvReader(sr, CultureInfo.InvariantCulture))
+                using (TextFieldParser parser = new TextFieldParser(CUSTOMERS_FILE))
                 {
-                    var customers = cr.GetRecords<Customers>();
+                    parser.SetDelimiters(",");
+                    //QUOTES 
+                    parser.HasFieldsEnclosedInQuotes = true;
 
-                    foreach (Customers c in customers)
+                    parser.ReadFields();
+                    while (!parser.EndOfData)
                     {
-                        
-                        if (AddCustomers(c)) sum++;
+                        // Read current line fields, handle commas within quotes
+                        string[] fields = parser.ReadFields();
+
+                        if (fields != null && fields.Length == 13)
+                        {
+                            string customerNumber = fields[0].Trim('"');
+                            string customerName = fields[1].Trim('"');
+                            string contactLastName = fields[2].Trim('"');
+                            string contactFirstName = fields[3].Trim('"');
+                            string phone = fields[4].Trim('"');
+                            string addressLine1 = fields[5].Trim('"');
+                            string addressLine2 = fields[6].Trim('"') == "NULL" ? null : fields[6].Trim('"');
+                            string city = fields[7].Trim('"');
+                            string state = fields[8].Trim('"') == "NULL" ? null : fields[8].Trim('"');
+                            string postalCode = fields[9].Trim('"') == "NULL" ? null : fields[9].Trim('"');
+                            string country = fields[10].Trim('"');
+                            string salesRepEmployeeNumber = fields[11].Trim('"') == "NULL" ? null : fields[11].Trim('"');
+                            string creditLimit = fields[12].Trim('"') == "NULL" ? null : fields[12].Trim('"');
+
+
+                            int? toIntSalesRepEmployeeNumber = null;
+                            decimal? toDecimalCreditLimit = null;
+
+                            if (salesRepEmployeeNumber != null) toIntSalesRepEmployeeNumber = Convert.ToInt32(salesRepEmployeeNumber);
+                            if (creditLimit != null) toDecimalCreditLimit = Convert.ToDecimal(creditLimit);
+
+                            Customers c = new Customers
+                            {
+                                CustomerNumber = Convert.ToInt32(customerNumber),
+                                CustomerName = customerName,
+                                ContactLastName = contactLastName,
+                                ContactFirstName = contactFirstName,
+                                Phone = phone,
+                                AddressLine1 = addressLine1,
+                                AddressLine2 = addressLine2,
+                                City = city,
+                                State = state,
+                                PostalCode = postalCode,
+                                Country = country,
+                                SalesRepEmployeeNumber = toIntSalesRepEmployeeNumber,
+                                CreditLimit = toDecimalCreditLimit
+                            };
+
+                            if (AddCustomers(c)) sum++;
+                        }
                     }
                 }
             }
@@ -250,14 +297,48 @@ namespace EntityFramework_CodeFirst.DAO
             int sum = 0;
             try
             {
-                using (StreamReader sr = new StreamReader(EMPLOYEES_FILE))
-                using (CsvReader cr = new CsvReader(sr, CultureInfo.InvariantCulture))
+                using (TextFieldParser parser = new TextFieldParser(EMPLOYEES_FILE))
                 {
-                    var employees = cr.GetRecords<Employees>();
+                    parser.SetDelimiters(",");
+                    //QUOTES 
+                    parser.HasFieldsEnclosedInQuotes = true;
 
-                    foreach (Employees e in employees)
+                    parser.ReadFields();
+                    while (!parser.EndOfData)
                     {
-                        if (AddEmployees(e)) sum++;
+                        // Read current line fields, handle commas within quotes
+                        string[] fields = parser.ReadFields();
+
+                        if (fields != null && fields.Length == 8)
+                        {
+                            string employeeNumber = fields[0].Trim('"');
+                            string lastName = fields[1].Trim('"');
+                            string firstName = fields[2].Trim('"');
+                            string extension = fields[3].Trim('"');
+                            string email = fields[4].Trim('"');
+                            string officeCode = fields[5].Trim('"');
+                            string reportsTo = fields[6].Trim('"') == "NULL" ? null : fields[6].Trim('"');
+                            string jobTitle = fields[7].Trim('"');
+
+                            int? numReportsTo = null;
+
+                            if (reportsTo != null) numReportsTo = Convert.ToInt32(reportsTo);
+
+                            Employees e = new Employees
+                            {
+                                EmployeeNumber = Convert.ToInt32(employeeNumber),
+                                LastName = lastName,
+                                FirstName = firstName,
+                                Extension = extension,
+                                Email = email,
+                                OfficeCode = officeCode,
+                                ReportsTo = numReportsTo,
+                                JobTitle = jobTitle
+
+                            };
+
+                            if (AddEmployees(e)) sum++;
+                        }
                     }
                 }
             }
@@ -320,14 +401,37 @@ namespace EntityFramework_CodeFirst.DAO
             int sum = 0;
             try
             {
-                using (StreamReader sr = new StreamReader(ORDER_DETAILS_FILE))
-                using (CsvReader cr = new CsvReader(sr, CultureInfo.InvariantCulture))
+                using (TextFieldParser parser = new TextFieldParser(ORDER_DETAILS_FILE))
                 {
-                    var orderDetails = cr.GetRecords<OrderDetails>();
+                    parser.SetDelimiters(",");
+                    //QUOTES 
+                    parser.HasFieldsEnclosedInQuotes = true;
 
-                    foreach (OrderDetails od in orderDetails)
+                    parser.ReadFields();
+                    while (!parser.EndOfData)
                     {
-                        if (AddOrderDetails(od)) sum++;
+                        // Read current line fields, handle commas within quotes
+                        string[] fields = parser.ReadFields();
+
+                        if (fields != null && fields.Length == 5)
+                        {
+                            string orderNumber = fields[0].Trim('"');
+                            string productCode = fields[1].Trim('"');
+                            string quantityOrdered = fields[2].Trim('"');
+                            string priceEach = fields[3].Trim('"');
+                            string orderLineNumber = fields[4].Trim('"');
+
+                            OrderDetails o = new OrderDetails()
+                            {
+                                OrderNumber = Convert.ToInt32(orderNumber),
+                                ProductCode = productCode,
+                                QuantityOrdered = Convert.ToInt32(quantityOrdered),
+                                PriceEach = Convert.ToDouble(priceEach),
+                                OrderLineNumber = Convert.ToInt16(orderLineNumber)
+                            };
+
+                            if (AddOrderDetails(o)) sum++;
+                        }
                     }
                 }
             }
@@ -343,14 +447,45 @@ namespace EntityFramework_CodeFirst.DAO
             int sum = 0;
             try
             {
-                using (StreamReader sr = new StreamReader(ORDERS_FILE))
-                using (CsvReader cr = new CsvReader(sr, CultureInfo.InvariantCulture))
+                using (TextFieldParser parser = new TextFieldParser(ORDERS_FILE))
                 {
-                    var orders = cr.GetRecords<Orders>();
+                    parser.SetDelimiters(",");
+                    //QUOTES 
+                    parser.HasFieldsEnclosedInQuotes = true;
 
-                    foreach (Orders o in orders)
+                    parser.ReadFields();
+                    while (!parser.EndOfData)
                     {
-                        if (AddOrders(o)) sum++;
+                        // Read current line fields, handle commas within quotes
+                        string[] fields = parser.ReadFields();
+
+                        if (fields != null && fields.Length == 7)
+                        {
+                            string orderNumber = fields[0].Trim('"');
+                            string orderDate = fields[1].Trim('"');
+                            string requiredDate = fields[2].Trim('"');
+                            string shippedDate = fields[3].Trim('"') == "NULL" ? null : fields[3].Trim('"');
+                            string status = fields[4].Trim('"');
+                            string comments = fields[5].Trim('"') == "NULL" ? null : fields[5].Trim('"');
+                            string customerNumber = fields[6].Trim('"');
+
+                            DateTime? toDateShippedDate = null;
+
+                            if (shippedDate != null) toDateShippedDate = Convert.ToDateTime(toDateShippedDate);
+
+                            Orders o = new Orders()
+                            {
+                                OrderNumber = Convert.ToInt32(customerNumber),
+                                OrderDate = Convert.ToDateTime(orderDate),
+                                RequiredDate = Convert.ToDateTime(requiredDate),
+                                ShippedDate = toDateShippedDate,
+                                Status = status,
+                                Comments = comments,
+                                CustomerNumber = Convert.ToInt32(customerNumber)
+                            };
+
+                            if (AddOrders(o)) sum++;
+                        }
                     }
                 }
             }
@@ -366,14 +501,35 @@ namespace EntityFramework_CodeFirst.DAO
             int sum = 0;
             try
             {
-                using (StreamReader sr = new StreamReader(PAYMENTS_FILE))
-                using (CsvReader cr = new CsvReader(sr, CultureInfo.InvariantCulture))
+                using (TextFieldParser parser = new TextFieldParser(PAYMENTS_FILE))
                 {
-                    var payments = cr.GetRecords<Payments>();
+                    parser.SetDelimiters(",");
+                    //QUOTES 
+                    parser.HasFieldsEnclosedInQuotes = true;
 
-                    foreach (Payments p in payments)
+                    parser.ReadFields();
+                    while (!parser.EndOfData)
                     {
-                        if (AddPayments(p)) sum++;
+                        // Read current line fields, handle commas within quotes
+                        string[] fields = parser.ReadFields();
+
+                        if (fields != null && fields.Length == 4)
+                        {
+                            string customerNumber = fields[0].Trim('"');
+                            string checkNumber = fields[1].Trim('"');
+                            string paymentDate = fields[2].Trim('"');
+                            string amount = fields[3].Trim('"');
+
+                            Payments p = new Payments()
+                            {
+                                CustomerNumber = Convert.ToInt32(customerNumber),
+                                CheckNumber = checkNumber,
+                                PaymentDate = Convert.ToDateTime(paymentDate),
+                                Amount = Convert.ToDouble(amount)
+                            };
+
+                            if (AddPayments(p)) sum++;
+                        }
                     }
                 }
             }
