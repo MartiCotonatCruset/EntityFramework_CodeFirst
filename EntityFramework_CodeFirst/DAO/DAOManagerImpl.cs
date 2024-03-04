@@ -42,7 +42,7 @@ namespace EntityFramework_CodeFirst.DAO
 
                 if (this.context.Customers.Find(oneCustomers.CustomerNumber) == null)
                 {
-                    oneCustomers.Employee = this.context.Employees.Find(oneCustomers.SalesRepEmployeeNumber);
+                    oneCustomers.Employee = (ICollection<Employees>)this.context.Employees.Find(oneCustomers.SalesRepEmployeeNumber);
                     this.context.Customers.Add(oneCustomers);
                     done = context.SaveChanges() > 0;
                 }
@@ -227,7 +227,7 @@ namespace EntityFramework_CodeFirst.DAO
             ImportCustomers();
             ImportPayments();
             ImportOrders();
-            ImportOrderDetails();
+            //ImportOrderDetails();
         }
 
         private int ImportCustomers()
