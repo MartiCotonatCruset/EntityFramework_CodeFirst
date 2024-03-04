@@ -37,5 +37,7 @@ namespace EntityFramework_CodeFirst.MODEL
 
         [Ignore]
         public Customers Customers { get; set; }
+        [Ignore]
+        public ICollection<OrderDetails> OrderDetails { get; set; }
     }
 }

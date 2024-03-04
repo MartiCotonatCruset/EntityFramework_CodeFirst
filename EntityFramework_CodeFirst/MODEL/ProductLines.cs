@@ -25,5 +25,8 @@ namespace EntityFramework_CodeFirst.MODEL
         [Column(TypeName = "mediumblob")]
         [Name("image")]
         public string? Image { get; set; }
+
+        [Ignore]
+        public ICollection<Products> Productes { get; set; }
     }
 }

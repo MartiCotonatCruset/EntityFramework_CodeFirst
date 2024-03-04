@@ -41,6 +41,11 @@ namespace EntityFramework_CodeFirst.MODEL
         [Ignore]
         public Offices Offices { get; set; }
         [Ignore]
-        public Employees? ReportsToSelfReference {  get; set; }
+        public ICollection<Customers> Customers { get; set; }
+        //Manager
+        [Ignore]
+        public ICollection<Employees>? Employeess { get; set; }
+        [Ignore]
+        public Employees? Manager {  get; set; }
     }
 }

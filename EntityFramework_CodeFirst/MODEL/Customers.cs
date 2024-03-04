@@ -56,5 +56,9 @@ namespace EntityFramework_CodeFirst.MODEL
 
         [Ignore]
         public Employees Employee { get; set; }
+        [Ignore]
+        public ICollection<Orders> Orders { get; set; }
+        [Ignore]
+        public ICollection<Payments> Payments { get; set; }
     }
 }

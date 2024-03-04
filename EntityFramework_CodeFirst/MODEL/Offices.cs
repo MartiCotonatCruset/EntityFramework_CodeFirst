@@ -40,5 +40,8 @@ namespace EntityFramework_CodeFirst.MODEL
         [Column(TypeName = "varchar(10)")]
         [Name("territory")]
         public string Territory { get; set; }
+
+        [Ignore]
+        public ICollection<Employees> Employees { get; set; }
     }
 }
