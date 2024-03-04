@@ -44,8 +44,8 @@ namespace EntityFramework_CodeFirst.MODEL
         public ICollection<Customers> Customers { get; set; }
         //Manager
         [Ignore]
-        public Employees Manager {  get; set; }
+        public ICollection<Employees>? Employeess { get; set; }
         [Ignore]
-        public ICollection<Employees>? Subordinates { get; set; }
+        public Employees? Manager {  get; set; }
     }
 }

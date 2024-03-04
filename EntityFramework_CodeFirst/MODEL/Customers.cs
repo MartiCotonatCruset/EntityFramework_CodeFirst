@@ -55,7 +55,7 @@ namespace EntityFramework_CodeFirst.MODEL
         public decimal? CreditLimit { get; set; }
 
         [Ignore]
-        public ICollection<Employees> Employee { get; set; }
+        public Employees Employee { get; set; }
         [Ignore]
         public ICollection<Orders> Orders { get; set; }
         [Ignore]
