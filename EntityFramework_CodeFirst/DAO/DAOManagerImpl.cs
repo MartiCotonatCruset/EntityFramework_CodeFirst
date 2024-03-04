@@ -475,7 +475,7 @@ namespace EntityFramework_CodeFirst.DAO
 
                             Orders o = new Orders()
                             {
-                                OrderNumber = Convert.ToInt32(customerNumber),
+                                OrderNumber = Convert.ToInt32(orderNumber),
                                 OrderDate = Convert.ToDateTime(orderDate),
                                 RequiredDate = Convert.ToDateTime(requiredDate),
                                 ShippedDate = toDateShippedDate,

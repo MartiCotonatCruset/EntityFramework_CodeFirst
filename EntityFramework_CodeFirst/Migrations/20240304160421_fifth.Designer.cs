@@ -3,14 +3,16 @@ using System;
 using EntityFramework_CodeFirst.MODEL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EntityFramework_CodeFirst.Migrations
 {
     [DbContext(typeof(ModelsClassicsDbContext))]
-    partial class ModelsClassicsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240304160421_fifth")]
+    partial class fifth
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
