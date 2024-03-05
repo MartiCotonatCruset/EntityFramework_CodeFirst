@@ -804,8 +804,36 @@ namespace EntityFramework_CodeFirst.DAO
             .ToList();
         }
         #endregion
-        #region JOIN
+        #region COUNT
+        public List<object> CountEmployeesPerOffice()
+        {
+            var employeesPerOffice = context.Offices
+                .Select(office => new
+                {
+                    OfficeCity = office.City,
+                    TotalEmployees = office.Employees.Count()
+                })
+                .ToList();
 
+            return employeesPerOffice.Cast<object>().ToList();
+        }
+        #endregion
+        #region JOIN
+        public List<object> JoinOfficeEmployees()
+        {
+            var officeEmployees = context.Offices
+                .Join(context.Employees,
+                    office => office.OfficeCode,
+                    employee => employee.OfficeCode,
+                    (office, employee) => new
+                    {
+                        OfficeCity = office.City,
+                        EmployeeName = employee.FirstName 
+                    })
+                .ToList();
+
+            return officeEmployees.Cast<object>().ToList();
+        }
         #endregion
         #endregion
     }

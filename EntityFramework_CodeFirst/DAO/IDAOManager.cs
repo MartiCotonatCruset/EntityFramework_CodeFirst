@@ -33,6 +33,8 @@ namespace EntityFramework_CodeFirst.DAO
         public List<Orders> OrderOrders(string filtre);
         public List<OrderDetails> OrderOrderDetails(string filtre);
 
-        
+        //JOINS
+        public List<Offices> JoinOfficeEmployees();
+
     }
 }
