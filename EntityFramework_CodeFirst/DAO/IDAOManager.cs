@@ -33,24 +33,6 @@ namespace EntityFramework_CodeFirst.DAO
         public List<Orders> OrderOrders(string filtre);
         public List<OrderDetails> OrderOrderDetails(string filtre);
 
-        // INSERT / CREATE
-        public bool InsertProductLine(ProductLines productLine);
-        public bool InsertProduct(Products product);
-        public bool InsertOffice(Offices office);
-        public bool InsertEmployee(Employees employee);
-        public bool InsertCustomer(Customers customer);
-        public bool InsertPayment(Payments payment);
-        public bool InsertOrder(Orders order);
-        public bool InsertOrderDetail(OrderDetails orderDetail);
-
-        // DELETE
-        public bool DeleteProductLine();
-        public bool DeleteProduct();
-        public bool DeleteOffice();
-        public bool DeleteEmployee();
-        public bool DeleteCustomer();
-        public bool DeletePayment();
-        public bool DeleteOrder();
-        public bool DeleteOrderDetail();
+        
     }
 }

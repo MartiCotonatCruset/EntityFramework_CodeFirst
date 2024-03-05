@@ -804,6 +804,9 @@ namespace EntityFramework_CodeFirst.DAO
             .ToList();
         }
         #endregion
+        #region JOIN
+
+        #endregion
         #endregion
     }
 }
