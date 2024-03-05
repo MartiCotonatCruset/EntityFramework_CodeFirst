@@ -34,7 +34,10 @@ namespace EntityFramework_CodeFirst.DAO
         public List<OrderDetails> OrderOrderDetails(string filtre);
 
         //JOINS
-        public List<Offices> JoinOfficeEmployees();
+        public List<object> JoinOfficeEmployees();
+
+        //COUNT
+        public List<object> CountEmployeesPerOffice();
 
     }
 }

@@ -805,9 +805,10 @@ namespace EntityFramework_CodeFirst.DAO
         }
         #endregion
         #region COUNT
-        public List<object> CountEmployeesPerOffice()
+        public List<object> CountEmployeesPerOffice(string officeCode)
         {
             var employeesPerOffice = context.Offices
+                .Where(office => office.OfficeCode == officeCode)
                 .Select(office => new
                 {
                     OfficeCity = office.City,
@@ -819,9 +820,10 @@ namespace EntityFramework_CodeFirst.DAO
         }
         #endregion
         #region JOIN
-        public List<object> JoinOfficeEmployees()
+        public List<object> JoinOfficeEmployees(string officeCode)
         {
             var officeEmployees = context.Offices
+                .Where(office => office.OfficeCode == officeCode)
                 .Join(context.Employees,
                     office => office.OfficeCode,
                     employee => employee.OfficeCode,
