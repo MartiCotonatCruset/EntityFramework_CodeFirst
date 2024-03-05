@@ -19,8 +19,6 @@ namespace EntityFramework_CodeFirst
     /// </summary>
     public partial class MainWindow : Window
     {
-        private enum crudOptions { PRODUCTLINE, PRODUCT, OFFICES, EMPLOYEE, CUSTOMER, PAYMENT, ORDER, ORDERDETAIL};
-
         List<ProductLines> lines = new List<ProductLines>();
         List<Products> products = new List<Products>();
         List<Offices> offices = new List<Offices>();
@@ -47,7 +45,7 @@ namespace EntityFramework_CodeFirst
             lines = dao.GetProductLines();
             dgProdcutLines.ItemsSource = lines;
             products = dao.GetProducts();
-            dgProdcuts.ItemsSource = products;
+            dgProducts.ItemsSource = products;
             offices = dao.GetOffices();
             dgOffices.ItemsSource = offices;
             employees = dao.GetEmployees();
@@ -78,7 +76,7 @@ namespace EntityFramework_CodeFirst
                 {
                     filtre = tbFiltreProducts.Text.ToLower();
                     products = dao.OrderProducts(filtre);
-                    dgProdcuts.ItemsSource = products;
+                    dgProducts.ItemsSource = products;
                 }
                 else if (tbFiltreOffices.IsFocused)
                 {
