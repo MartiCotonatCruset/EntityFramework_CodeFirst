@@ -1,5 +1,5 @@
-using CsvHelper;
 using EntityFramework_CodeFirst.MODEL;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Microsoft.VisualBasic.FileIO;
 using Microsoft.Xaml.Behaviors.Core;
 using System.Diagnostics.Metrics;
@@ -639,6 +639,7 @@ namespace EntityFramework_CodeFirst.DAO
         #endregion
 
         #region QUERIES
+        #region GETS
         public List<ProductLines> GetProductLines()
         {
             return context.ProductLines.ToList();
@@ -678,6 +679,130 @@ namespace EntityFramework_CodeFirst.DAO
         {
             return context.OrderDetails.ToList();
         }
+        #endregion
+        #region FILTRES
+        public List<ProductLines> OrderProductLines(string filtre)
+        {
+            return context.ProductLines.Where(p =>
+                p.ProductLine.ToLower().Contains(filtre) ||
+                p.TextDescription.ToLower().Contains(filtre) ||
+                p.HtmlDescription.ToLower().Contains(filtre) ||
+                p.Image.ToLower().Contains(filtre)
+            )
+            .OrderBy(p => p.ProductLine)
+            .ToList();
+        }
+
+        public List<Products> OrderProducts(string filtre)
+        {
+            return context.Products.Where(p =>
+                p.ProductCode.Contains(filtre) ||
+                p.ProductName.Contains(filtre) ||
+                p.ProductLine.Contains(filtre) ||
+                p.ProductScale.Contains(filtre) ||
+                p.ProductVendor.Contains(filtre) ||
+                p.ProductDescription.Contains(filtre) ||
+                p.QuantityInStock.ToString().Contains(filtre) ||
+                p.BuyPrice.ToString().Contains(filtre) ||
+                p.MSRP.ToString().Contains(filtre)
+            )
+            .OrderBy(p => p.ProductLine)
+            .ToList();
+        }
+
+        public List<Offices> OrderOffices(string filtre)
+        {
+            return context.Offices.Where(p =>
+                p.OfficeCode.Contains(filtre) ||
+                p.City.Contains(filtre) ||
+                p.Phone.Contains(filtre) ||
+                p.AddressLine1.Contains(filtre) ||
+                p.AddressLine2.Contains(filtre) ||
+                p.State.Contains(filtre) ||
+                p.Country.Contains(filtre) ||
+                p.PostalCode.Contains(filtre) ||
+                p.Territory.Contains(filtre)
+            )
+            .OrderBy(p => p.OfficeCode)
+            .ToList();
+        }
+
+        public List<Employees> OrderEmployees(string filtre)
+        {
+            return context.Employees.Where(p =>
+                p.EmployeeNumber.ToString().Contains(filtre) ||
+                p.LastName.Contains(filtre) ||
+                p.FirstName.Contains(filtre) ||
+                p.Extension.Contains(filtre) ||
+                p.OfficeCode.Contains(filtre) ||
+                p.ReportsTo.ToString().Contains(filtre) ||
+                p.JobTitle.Contains(filtre)
+            )
+            .OrderBy(p => p.EmployeeNumber)
+            .ToList();
+        }
+
+        public List<Customers> OrderCustomers(string filtre)
+        {
+            return context.Customers.Where(p =>
+                p.CustomerNumber.ToString().Contains(filtre) ||
+                p.CustomerName.Contains(filtre) ||
+                p.ContactLastName.Contains(filtre) ||
+                p.ContactFirstName.Contains(filtre) ||
+                p.Phone.Contains(filtre) ||
+                p.AddressLine1.Contains(filtre) ||
+                p.AddressLine2.Contains(filtre) ||
+                p.City.Contains(filtre) ||
+                p.State.Contains(filtre) ||
+                p.PostalCode.Contains(filtre) ||
+                p.Country.Contains(filtre) ||
+                p.SalesRepEmployeeNumber.ToString().Contains(filtre) ||
+                p.CreditLimit.ToString().Contains(filtre)
+            )
+            .OrderBy(p => p.CustomerNumber)
+            .ToList();
+        }
+
+        public List<Payments> OrderPayments(string filtre)
+        {
+            return context.Payments.Where(p =>
+                p.CustomerNumber.ToString().Contains(filtre) ||
+                p.CheckNumber.Contains(filtre) ||
+                p.PaymentDate.ToString().Contains(filtre) ||
+                p.Amount.ToString().Contains(filtre)
+            )
+            .OrderBy(p => p.CustomerNumber)
+            .ToList();
+        }
+
+        public List<Orders> OrderOrders(string filtre)
+        {
+            return context.Orders.Where(p =>
+                p.OrderNumber.ToString().Contains(filtre) ||
+                p.OrderDate.ToString().Contains(filtre) ||
+                p.RequiredDate.ToString().Contains(filtre) ||
+                p.ShippedDate.ToString().Contains(filtre) ||
+                p.Status.Contains(filtre) ||
+                p.Comments.Contains(filtre) ||
+                p.CustomerNumber.ToString().Contains(filtre)
+            )
+            .OrderBy(p => p.OrderNumber)
+            .ToList();
+        }
+
+        public List<OrderDetails> OrderOrderDetails(string filtre)
+        {
+            return context.OrderDetails.Where(p =>
+                p.OrderNumber.ToString().Contains(filtre) ||
+                p.ProductCode.Contains(filtre) ||
+                p.QuantityOrdered.ToString().Contains(filtre) ||
+                p.PriceEach.ToString().Contains(filtre) ||
+                p.OrderLineNumber.ToString().Contains(filtre)
+            )
+            .OrderBy(p => p.OrderNumber)
+            .ToList();
+        }
+        #endregion
         #endregion
     }
 }

@@ -12,7 +12,8 @@ namespace EntityFramework_CodeFirst.DAO
         // ADDS AND IMPORTS
         public void ImportAll();
 
-        //QUERIES
+        // QUERIES
+        // GETS
         public List<ProductLines> GetProductLines();
         public List<Products> GetProducts();
         public List<Offices> GetOffices();
@@ -21,5 +22,15 @@ namespace EntityFramework_CodeFirst.DAO
         public List<Payments> GetPayments();
         public List<Orders> GetOrders();
         public List<OrderDetails> GetOrderDetails();
+
+        // FILTRES
+        public List<ProductLines> OrderProductLines(string filtre);
+        public List<Products> OrderProducts(string filtre);
+        public List<Offices> OrderOffices(string filtre);
+        public List<Employees> OrderEmployees(string filtre);
+        public List<Customers> OrderCustomers(string filtre);
+        public List<Payments> OrderPayments(string filtre);
+        public List<Orders> OrderOrders(string filtre);
+        public List<OrderDetails> OrderOrderDetails(string filtre);
     }
 }
