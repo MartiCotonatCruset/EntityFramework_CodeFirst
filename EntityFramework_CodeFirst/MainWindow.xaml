@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EntityFramework_CodeFirst"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="1200">
+        Title="MainWindow" Height="550" Width="1200" FontSize="18">
     <DockPanel>
         <TextBlock DockPanel.Dock="Top" Text="Models Classics" TextAlignment="Center" FontSize="30" FontWeight="Bold" Background="#1CABFF" Foreground="White" Padding="5"/>
         <TabControl>
             <TabItem Header="Product Lines">
                 <DockPanel>
                     <DockPanel DockPanel.Dock="Top" Margin="10">
+                        <Button DockPanel.Dock="Right" Content="CRUD" x:Name="btnCRUDProductLine" Click="btnCRUDProductLine_Click"/>
                         <TextBox x:Name="tbFiltreProductLines" Margin="5" TextChanged="tbFiltre_TextChanged"/>
                     </DockPanel>
                     <DataGrid x:Name="dgProdcutLines"/>
@@ -20,6 +21,7 @@
             <TabItem Header="Products">
                 <DockPanel>
                     <DockPanel DockPanel.Dock="Top" Margin="10">
+                        <Button DockPanel.Dock="Right" Content="CRUD" x:Name="btnCRUDProduct" Click="btnCRUDProduct_Click"/>
                         <TextBox DockPanel.Dock="Top" x:Name="tbFiltreProducts" Margin="5" TextChanged="tbFiltre_TextChanged"/>
                     </DockPanel>
                     <DataGrid x:Name="dgProdcuts"/>
@@ -28,6 +30,7 @@
             <TabItem Header="Offices">
                 <DockPanel>
                     <DockPanel DockPanel.Dock="Top" Margin="10">
+                        <Button DockPanel.Dock="Right" Content="CRUD" x:Name="btnCRUDOffice" Click="btnCRUDOffice_Click"/>
                         <TextBox DockPanel.Dock="Top" x:Name="tbFiltreOffices" Margin="5" TextChanged="tbFiltre_TextChanged"/>
                     </DockPanel>
                     <DataGrid x:Name="dgOffices"/>
@@ -36,6 +39,7 @@
             <TabItem Header="Employees">
                 <DockPanel>
                     <DockPanel DockPanel.Dock="Top" Margin="10">
+                        <Button DockPanel.Dock="Right" Content="CRUD" x:Name="btnCRUDEmployee" Click="btnCRUDEmployee_Click"/>
                         <TextBox DockPanel.Dock="Top" x:Name="tbFiltreEmployees" Margin="5" TextChanged="tbFiltre_TextChanged"/>
                     </DockPanel>
                     <DataGrid x:Name="dgEmployees"/>
@@ -44,6 +48,7 @@
             <TabItem Header="Customers">
                 <DockPanel>
                     <DockPanel DockPanel.Dock="Top" Margin="10">
+                        <Button DockPanel.Dock="Right" Content="CRUD" x:Name="btnCRUDCustomer" Click="btnCRUDCustomer_Click"/>
                         <TextBox DockPanel.Dock="Top" x:Name="tbFiltreCustomer" Margin="5" TextChanged="tbFiltre_TextChanged"/>
                     </DockPanel>
                     <DataGrid x:Name="dgCustomer"/>
@@ -52,6 +57,7 @@
             <TabItem Header="Payments">
                 <DockPanel>
                     <DockPanel DockPanel.Dock="Top" Margin="10">
+                        <Button DockPanel.Dock="Right" Content="CRUD" x:Name="btnCRUDPayment" Click="btnCRUDPayment_Click"/>
                         <TextBox DockPanel.Dock="Top" x:Name="tbFiltrePayments" Margin="5" TextChanged="tbFiltre_TextChanged"/>
                     </DockPanel>
                     <DataGrid x:Name="dgPayments"/>
@@ -60,6 +66,7 @@
             <TabItem Header="Orders">
                 <DockPanel>
                     <DockPanel DockPanel.Dock="Top" Margin="10">
+                        <Button DockPanel.Dock="Right" Content="CRUD" x:Name="btnCRUDOrder" Click="btnCRUDOrder_Click"/>
                         <TextBox DockPanel.Dock="Top" x:Name="tbFiltreOrders" Margin="5" TextChanged="tbFiltre_TextChanged"/>
                     </DockPanel>
                     <DataGrid x:Name="dgOrders"/>
@@ -68,28 +75,11 @@
             <TabItem Header="Order Details">
                 <DockPanel>
                     <DockPanel DockPanel.Dock="Top" Margin="10">
+                        <Button DockPanel.Dock="Right" Content="CRUD" x:Name="btnCRUDOderDetail" Click="btnCRUDOderDetail_Click"/>
                         <TextBox DockPanel.Dock="Top" x:Name="tbFiltreOrderDetails" Margin="5" TextChanged="tbFiltre_TextChanged"/>
                     </DockPanel>
                     <DataGrid x:Name="dgOrderDetails"/>
                 </DockPanel>
-            </TabItem>
-            <TabItem Header="CRUD">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="4*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <ComboBox Grid.Column="1" Name="cbCRUD"/>
-                    <StackPanel Grid.Column="1" Grid.Row="1">
-                        
-                    </StackPanel>
-                </Grid>
             </TabItem>
         </TabControl>
     </DockPanel>

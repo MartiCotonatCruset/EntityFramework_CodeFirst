@@ -19,6 +19,8 @@ namespace EntityFramework_CodeFirst
     /// </summary>
     public partial class MainWindow : Window
     {
+        private enum crudOptions { PRODUCTLINE, PRODUCT, OFFICES, EMPLOYEE, CUSTOMER, PAYMENT, ORDER, ORDERDETAIL};
+
         List<ProductLines> lines = new List<ProductLines>();
         List<Products> products = new List<Products>();
         List<Offices> offices = new List<Offices>();
@@ -35,9 +37,9 @@ namespace EntityFramework_CodeFirst
         {
             InitializeComponent();
             this.dao = DAOFactory.createDAOManager();
-            debouncer = new Debouncer(Filtra, 500);
             // dao.ImportAll();
             GetAllTables();
+            debouncer = new Debouncer(Filtra, 500);
         }
 
         private void GetAllTables()
@@ -60,6 +62,7 @@ namespace EntityFramework_CodeFirst
             dgOrderDetails.ItemsSource = orderDetails;
         }
 
+        #region FILTRES
         private void Filtra()
         {
             string filtre;
@@ -120,5 +123,47 @@ namespace EntityFramework_CodeFirst
         {
             debouncer.Call();
         }
+        #endregion
+        #region CRUD
+        private void btnCRUDProductLine_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnCRUDProduct_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnCRUDOffice_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnCRUDEmployee_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnCRUDCustomer_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnCRUDPayment_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnCRUDOrder_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnCRUDOderDetail_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        #endregion
     }
 }

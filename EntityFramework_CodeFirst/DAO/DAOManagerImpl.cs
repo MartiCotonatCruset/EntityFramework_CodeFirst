@@ -803,6 +803,170 @@ namespace EntityFramework_CodeFirst.DAO
             .ToList();
         }
         #endregion
+        #region CRUD
+        #region INSERTS
+        public bool InsertProductLine(ProductLines productLine)
+        {
+            bool done = true;
+            try
+            {
+                context.ProductLines.Add(productLine);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                done = false;
+            }
+            return done;
+        }
+
+        public bool InsertProduct(Products product)
+        {
+            bool done = true;
+            try
+            {
+                context.Products.Add(product);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                done = false;
+            }
+            return done;
+        }
+
+        public bool InsertOffice(Offices office)
+        {
+            bool done = true;
+            try
+            {
+                context.Offices.Add(office);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                done = false;
+            }
+            return done;
+        }
+
+        public bool InsertEmployee(Employees employee)
+        {
+            bool done = true;
+            try
+            {
+                context.Employees.Add(employee);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                done = false;
+            }
+            return done;
+        }
+
+        public bool InsertCustomer(Customers customer)
+        {
+            bool done = true;
+            try
+            {
+                context.Customers.Add(customer);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                done = false;
+            }
+            return done;
+        }
+
+        public bool InsertPayment(Payments payment)
+        {
+            bool done = true;
+            try
+            {
+                context.Payments.Add(payment);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                done = false;
+            }
+            return done;
+        }
+
+        public bool InsertOrder(Orders order)
+        {
+            bool done = true;
+            try
+            {
+                context.Orders.Add(order);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                done = false;
+            }
+            return done;
+        }
+
+        public bool InsertOrderDetail(OrderDetails orderDetail)
+        {
+            bool done = true;
+            try
+            {
+                context.OrderDetails.Add(orderDetail);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                done = false;
+            }
+            return done;
+        }
+        #endregion
+        #region DELETE
+        public bool DeleteProductLine()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteProduct()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteOffice()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteEmployee()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteCustomer()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeletePayment()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteOrder()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteOrderDetail()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+        #endregion
         #endregion
     }
 }
