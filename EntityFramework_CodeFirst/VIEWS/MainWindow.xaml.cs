@@ -122,46 +122,5 @@ namespace EntityFramework_CodeFirst
             debouncer.Call();
         }
         #endregion
-        #region CRUD
-        private void btnCRUDProductLine_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnCRUDProduct_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnCRUDOffice_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnCRUDEmployee_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnCRUDCustomer_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnCRUDPayment_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnCRUDOrder_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnCRUDOderDetail_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-        #endregion
     }
 }

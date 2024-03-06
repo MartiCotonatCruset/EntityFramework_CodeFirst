@@ -60,6 +60,7 @@
                             <DataGridTextColumn Header="Country" Binding="{Binding Country}"/>
                             <DataGridTextColumn Header="Postal Code" Binding="{Binding PostalCode}"/>
                             <DataGridTextColumn Header="Territory" Binding="{Binding Territory}"/>
+                            <DataGridTextColumn Header="Employee Number" Binding="{Binding EmployeeNum}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </DockPanel>
