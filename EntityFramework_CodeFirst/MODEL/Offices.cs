@@ -30,6 +30,8 @@ namespace EntityFramework_CodeFirst.MODEL
         public string PostalCode { get; set; }
         [Column(TypeName = "varchar(10)")]
         public string Territory { get; set; }
+        [NotMapped]
+        public int NumEmployees { get; set; }
 
         public ICollection<Employees> Employees { get; set; }
     }

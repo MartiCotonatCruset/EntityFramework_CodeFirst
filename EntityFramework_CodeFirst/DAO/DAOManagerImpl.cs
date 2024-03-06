@@ -653,7 +653,10 @@ namespace EntityFramework_CodeFirst.DAO
 
         public List<Offices> GetOffices()
         {
-            return context.Offices.ToList();
+            List<Offices> offices = context.Offices.ToList();
+            foreach (Offices o in offices)
+                o.NumEmployees = CountEmployeesPerOffice(o.OfficeCode);
+            return offices;
         }
 
         public List<Employees> GetEmployees()
@@ -805,32 +808,32 @@ namespace EntityFramework_CodeFirst.DAO
         }
         #endregion
         #region COUNT
-        public List<object> CountEmployeesPerOffice(string officeCode)
+        public int CountEmployeesPerOffice(string officeCode)
         {
-            var employeesPerOffice = context.Offices
+            int totalEmployees = context.Offices
                 .Where(office => office.OfficeCode == officeCode)
-                .Select(office => new
-                {
-                    OfficeCity = office.City,
-                    TotalEmployees = office.Employees.Count()
-                })
-                .ToList();
+                .Select(office => office.Employees.Count())
+                .FirstOrDefault();
 
-            return employeesPerOffice.Cast<object>().ToList();
+            return totalEmployees;
         }
         #endregion
         #region JOIN
-        public List<object> JoinOfficeEmployees(string officeCode)
+        public List<object> JoinOfficeEmployees(string city)
         {
             var officeEmployees = context.Offices
-                .Where(office => office.OfficeCode == officeCode)
+                .Where(office => office.City.ToLower() == city.ToLower())
                 .Join(context.Employees,
                     office => office.OfficeCode,
                     employee => employee.OfficeCode,
                     (office, employee) => new
                     {
                         OfficeCity = office.City,
-                        EmployeeName = employee.FirstName 
+                        EmployeeLastName = employee.LastName,
+                        EmployeeFirstName = employee.FirstName,
+                        Email = employee.Email,
+                        ReportsTo = employee.ReportsTo,
+                        JobTitle = employee.JobTitle
                     })
                 .ToList();
 

@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace EntityFramework_CodeFirst
+namespace EntityFramework_CodeFirst.VIEWS
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -27,6 +27,7 @@ namespace EntityFramework_CodeFirst
         List<Payments> payments = new List<Payments>();
         List<Orders> orders = new List<Orders>();
         List<OrderDetails> orderDetails = new List<OrderDetails>();
+        List<object> employeesPerOffice = new List<object>();
 
         Debouncer debouncer;
         IDAOManager dao;
@@ -34,12 +35,16 @@ namespace EntityFramework_CodeFirst
         public MainWindow()
         {
             InitializeComponent();
+            WindowState = WindowState.Maximized;
             this.dao = DAOFactory.createDAOManager();
             // dao.ImportAll();
             GetAllTables();
             debouncer = new Debouncer(Filtra, 500);
+            cbEmployeesPerOffice.SelectedIndex = 0;
+            cbEmployeesPerOffice.ItemsSource = offices.Select(o => o.City);
         }
 
+        #region GETS
         private void GetAllTables()
         {
             lines = dao.GetProductLines();
@@ -59,7 +64,7 @@ namespace EntityFramework_CodeFirst
             orderDetails = dao.GetOrderDetails();
             dgOrderDetails.ItemsSource = orderDetails;
         }
-
+        #endregion
         #region FILTRES
         private void Filtra()
         {
@@ -122,5 +127,39 @@ namespace EntityFramework_CodeFirst
             debouncer.Call();
         }
         #endregion
+
+        #region JOIN
+        private void cbEmployeesPerOffice_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string city = "";
+            switch (cbEmployeesPerOffice.SelectedIndex)
+            {
+                case 0:
+                    city = "San Francisco";
+                    break;
+                case 1:
+                    city = "Boston";
+                    break;
+                case 2:
+                    city = "NYC";
+                    break;
+                case 3:
+                    city = "Paris";
+                    break;
+                case 4:
+                    city = "Tokyo";
+                    break;
+                case 5:
+                    city = "Sydney";
+                    break;
+                case 6:
+                    city = "London";
+                    break;
+            }
+            employeesPerOffice = dao.JoinOfficeEmployees(city);
+            dgEmployeesPerOffice.ItemsSource = employeesPerOffice;
+        }
+        #endregion
+
     }
 }
