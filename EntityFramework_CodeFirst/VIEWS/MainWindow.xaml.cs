@@ -127,39 +127,12 @@ namespace EntityFramework_CodeFirst.VIEWS
             debouncer.Call();
         }
         #endregion
-
         #region JOIN
         private void cbEmployeesPerOffice_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string city = "";
-            switch (cbEmployeesPerOffice.SelectedIndex)
-            {
-                case 0:
-                    city = "San Francisco";
-                    break;
-                case 1:
-                    city = "Boston";
-                    break;
-                case 2:
-                    city = "NYC";
-                    break;
-                case 3:
-                    city = "Paris";
-                    break;
-                case 4:
-                    city = "Tokyo";
-                    break;
-                case 5:
-                    city = "Sydney";
-                    break;
-                case 6:
-                    city = "London";
-                    break;
-            }
-            employeesPerOffice = dao.JoinOfficeEmployees(city);
+            employeesPerOffice = dao.JoinOfficeEmployees(cbEmployeesPerOffice.SelectedItem.ToString());
             dgEmployeesPerOffice.ItemsSource = employeesPerOffice;
         }
         #endregion
-
     }
 }

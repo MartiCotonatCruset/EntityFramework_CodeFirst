@@ -1,4 +1,5 @@
 using EntityFramework_CodeFirst.MODEL;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Microsoft.VisualBasic.FileIO;
 using Microsoft.Xaml.Behaviors.Core;
@@ -825,19 +826,35 @@ namespace EntityFramework_CodeFirst.DAO
                 .Where(office => office.City.ToLower() == city.ToLower())
                 .Join(context.Employees,
                     office => office.OfficeCode,
-                    employee => employee.OfficeCode,
+                    emp => emp.OfficeCode,
                     (office, employee) => new
                     {
-                        OfficeCity = office.City,
-                        EmployeeLastName = employee.LastName,
-                        EmployeeFirstName = employee.FirstName,
-                        Email = employee.Email,
-                        ReportsTo = employee.ReportsTo,
-                        JobTitle = employee.JobTitle
+                        Employee = employee,
+                        Office = office
                     })
                 .ToList();
 
-            return officeEmployees.Cast<object>().ToList();
+            var result = officeEmployees.Select(item => new
+            {
+                EmployeeName = item.Employee.LastName + ", " + item.Employee.FirstName,
+                Email = item.Employee.Email,
+                Manager = GetManagerName(item.Employee.ReportsTo),
+                JobTitle = item.Employee.JobTitle
+            }).ToList();
+
+            return result.Cast<object>().ToList();
+        }
+
+        private string GetManagerName(int? managerId)
+        {
+            string result = "";
+            if (managerId != null)
+            {
+                var manager = context.Employees.FirstOrDefault(e => e.EmployeeNumber == managerId.Value);
+                if (manager != null)
+                    result = manager.LastName + ", " + manager.FirstName;
+            }
+            return result;
         }
         #endregion
         #endregion

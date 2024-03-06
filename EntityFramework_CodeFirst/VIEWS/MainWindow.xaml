@@ -161,9 +161,12 @@
             <TabItem Header="Employees per Office">
                 <DockPanel>
                     <ComboBox DockPanel.Dock="Top" Name="cbEmployeesPerOffice" Margin="10" SelectionChanged="cbEmployeesPerOffice_SelectionChanged"/>
-                    <DataGrid Name="dgEmployeesPerOffice" AutoGenerateColumns="True" IsReadOnly="True">
+                    <DataGrid Name="dgEmployeesPerOffice" AutoGenerateColumns="False" IsReadOnly="True">
                         <DataGrid.Columns>
-                            
+                            <DataGridTextColumn Header="Employee name" Binding="{Binding EmployeeName}"/>
+                            <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
+                            <DataGridTextColumn Header="Manager" Binding="{Binding Manager}"/>
+                            <DataGridTextColumn Header="Job Title" Binding="{Binding JobTitle}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </DockPanel>
